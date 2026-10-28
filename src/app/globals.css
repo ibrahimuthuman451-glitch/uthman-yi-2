@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-navy-900;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible keyboard focus everywhere, including links styled as buttons. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+
+  ::selection {
+    @apply bg-brand-100 text-navy-900;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-700;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-brand-400;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-navy-100 bg-white shadow-card;
+  }
+
+  .prose-uy {
+    @apply text-[15px] leading-7 text-muted;
+  }
+
+  .prose-uy p + p {
+    @apply mt-4;
+  }
+
+  .prose-uy h2 {
+    @apply mt-8 text-xl font-semibold text-navy-900;
+  }
+
+  .prose-uy h3 {
+    @apply mt-6 text-base font-semibold text-navy-900;
+  }
+
+  .prose-uy ul {
+    @apply mt-3 list-disc space-y-2 pl-5;
+  }
+
+  .prose-uy a {
+    @apply font-medium text-brand-700 underline underline-offset-4;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-navy-800;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-navy-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-navy-300 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
+  }
+
+  .field-hint {
+    @apply mt-1.5 text-xs text-muted;
+  }
+
+  .field-error {
+    @apply mt-1.5 text-xs font-medium text-red-600;
+  }
+
+  .table-wrap {
+    @apply w-full overflow-x-auto rounded-2xl border border-navy-100 bg-white;
+  }
+
+  .admin-table {
+    @apply w-full min-w-[640px] border-collapse text-left text-sm;
+  }
+
+  .admin-table thead th {
+    @apply border-b border-navy-100 bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wide text-navy-500;
+  }
+
+  .admin-table tbody td {
+    @apply border-b border-navy-50 px-4 py-3 align-top text-navy-700;
+  }
+
+  .admin-table tbody tr:last-child td {
+    @apply border-b-0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Prevent long SKUs, order numbers and URLs from breaking mobile layouts. */
+  .break-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  .hero-grid {
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(57, 199, 242, 0.16), transparent 42%),
+      radial-gradient(circle at 82% 8%, rgba(56, 102, 240, 0.28), transparent 46%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: auto, auto, 64px 64px, 64px 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

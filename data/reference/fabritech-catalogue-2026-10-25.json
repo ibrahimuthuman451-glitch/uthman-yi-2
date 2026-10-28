@@ -1,0 +1,312 @@
+{
+  "provenance": {
+    "description": "Reference catalogue research for Uthman IY category and pricing planning. These are third-party listings, NOT Uthman IY products, selling prices, stock levels or approved descriptions.",
+    "sourceCompany": "FabriTech",
+    "sourceUrl": "https://www.fabritech.rw/shop",
+    "sourceApi": "https://fabritech-web-backend.vercel.app/api/products (public storefront endpoint)",
+    "retrievedAt": "2026-10-25T22:33:00Z",
+    "retrievedBy": "Automated catalogue research during repository build",
+    "fieldsCaptured": [
+      "externalId",
+      "title",
+      "category",
+      "referencePriceRwf"
+    ],
+    "fieldsDeliberatelyExcluded": [
+      "product images",
+      "marketing descriptions",
+      "stock quantities",
+      "discount claims"
+    ],
+    "exclusionReason": "Image and description reuse requires authorisation from the copyright owner. Uthman IY must supply its own photography and copy.",
+    "usage": "Load into the ReferenceCatalogItem table for admin research only. Never shown as Uthman IY prices. An administrator must create an approved listing with Uthman IY's own price and content."
+  },
+  "items": [
+    {
+      "externalId": "69395fd16ad7a8a27f9c50c8",
+      "title": "Starlink Kit V4",
+      "category": "Starlink Kits & Routers",
+      "categorySlug": "starlink-kits-routers",
+      "referencePriceRwf": 650000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "693968816ad7a8a27f9c50ce",
+      "title": "Starlink Mini",
+      "category": "Starlink Kits & Routers",
+      "categorySlug": "starlink-kits-routers",
+      "referencePriceRwf": 450000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "693969a76ad7a8a27f9c50d4",
+      "title": "Starlink Ethernet Adapter",
+      "category": "Starlink Accessories",
+      "categorySlug": "starlink-accessories",
+      "referencePriceRwf": 150000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "693a749ba71ccc4d91f82753",
+      "title": "Starlink Mini Router",
+      "category": "Starlink Kits & Routers",
+      "categorySlug": "starlink-kits-routers",
+      "referencePriceRwf": 150000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b5ef76b1248f99adc3be9",
+      "title": "HIKVISION DS-2CD1347G2H-LIU Color Vu with Smart Hybrid 4MP Dome",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 115000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b5fc3b16d041f1eaf83df",
+      "title": "HIKVISION DS-2CD1047G2H-LIU Color Vu with Smart Hybrid 4MP Bullet",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 115000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b60c4b16d041f1eaf83e3",
+      "title": "HIKVISION 4CH KIT COLORVU DS-J142I/7204HGHIM1+ 2+2CAM/COLORVU",
+      "category": "CCTV Kits",
+      "categorySlug": "cctv-kits",
+      "referencePriceRwf": 286000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b61b0b16d041f1eaf83e7",
+      "title": "HIKVISION 8CH KIT ColorVu DS-J142I / 7208HGHI-M1 + 4+4 CAM",
+      "category": "CCTV Kits",
+      "categorySlug": "cctv-kits",
+      "referencePriceRwf": 497900,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b62ccef7f22bcb210980d",
+      "title": "HIKVISION NVR DS-7616NI-Q2/16P",
+      "category": "NVR & Recoders",
+      "categorySlug": "nvr-recorders",
+      "referencePriceRwf": 352820,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b637eef7f22bcb2109811",
+      "title": "HIKVISION 4MP FIXED OUTDOOR IR WIFI STAND ALONE PT NETWORK CAMERA DS-2DE2C400IWG/W 4MM W",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 104000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b63faef7f22bcb2109815",
+      "title": "HIKVISION DS-UPS1000VA",
+      "category": "Power&Accessories",
+      "categorySlug": "power-accessories",
+      "referencePriceRwf": 104000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b6473ef7f22bcb2109819",
+      "title": "HIKVISION DS-UPS2000 VA",
+      "category": "Power&Accessories",
+      "categorySlug": "power-accessories",
+      "referencePriceRwf": 291460,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b72e4e4c00657c46665ed",
+      "title": "HIKVISION AX Hybrid Pro Kit",
+      "category": "Alarm Systems",
+      "categorySlug": "alarm-systems",
+      "referencePriceRwf": 230100,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "695b73a0e4c00657c46665fb",
+      "title": "HIKVISION DS-KIS313-P(B) Hybrid HD Intercom Kit",
+      "category": "Intercom Systems",
+      "categorySlug": "intercom-systems",
+      "referencePriceRwf": 201500,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvhyu2xc000007jvrzylfgvm",
+      "title": "HIKVISION 2 MP Fixed Outdoor Smart Hybrid-Light Wi-Fi PT Network Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 107800,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi0naav000007icrp2o3sap",
+      "title": "IMOU Ranger Mini 3MP Integrated-Bracket Indoor Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 56100,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi0q80e000107ic1rfgo2fv",
+      "title": "IMOU Ranger 2 Pro 5MP Indoor Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 60500,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi0td58000207ic4qam8drr",
+      "title": "IMOU Ranger 2 Dual 10MP Wi-Fi Indoor Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 96800,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi0w08t000307iczbigc4hf",
+      "title": "IMOU Cruiser Dual 2 6MP PTZ Smart Security Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 123200,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi88qrq000007l8aie1e9zk",
+      "title": "IMOU Cruiser 11MP (3MP+3MP+5MP) Triple PTZ Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 184800,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8bj3l000107l8srrldfxr",
+      "title": "4 MP ColorVu With Smart Hybrid Light Fixed Bullet Network Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 143000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8es2u000007kz3am2fdup",
+      "title": "IMOU Cruiser 10MP (5+5MP) DUAL LENS PTZ Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 139700,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8h529000107kz4mup6fdd",
+      "title": "IMOU Bullet 3 WiFi 3MP Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 74800,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8k8a9000207l8w9c77f1a",
+      "title": "IMOU Bullet 3 5MP WiFi Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 83600,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8mpba000307l8pm1fn000",
+      "title": "IMOU 10MP Dual-Lens Solar Security Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 242000,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    },
+    {
+      "externalId": "cmvi8p1rp000407l84nw8dp7b",
+      "title": "HIKVISION 2MP Smart Hybrid Light Audio Fixed Turret Camera",
+      "category": "CCTV Cameras",
+      "categorySlug": "cctv-cameras",
+      "referencePriceRwf": 38500,
+      "currency": "RWF",
+      "source": "FabriTech (fabritech.rw) public storefront catalogue",
+      "sourceUrl": "https://www.fabritech.rw/shop",
+      "retrievedAt": "2026-10-25T22:33:00Z"
+    }
+  ]
+}

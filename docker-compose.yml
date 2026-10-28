@@ -1,0 +1,24 @@
+# Optional local PostgreSQL for development.
+# Usage: docker compose up -d
+# Then set DATABASE_URL="postgresql://uthmaniy:uthmaniy@localhost:5432/uthmaniy?schema=public"
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: uthmaniy-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: uthmaniy
+      POSTGRES_PASSWORD: uthmaniy
+      POSTGRES_DB: uthmaniy
+    ports:
+      - "5432:5432"
+    volumes:
+      - uthmaniy-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uthmaniy -d uthmaniy"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  uthmaniy-db-data:

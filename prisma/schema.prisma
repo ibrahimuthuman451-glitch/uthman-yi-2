@@ -1,0 +1,435 @@
+// ---------------------------------------------------------------------------
+// Uthman IY platform database schema (PostgreSQL)
+// ---------------------------------------------------------------------------
+// Conventions:
+//  * All money values are integer Rwandan francs (RWF has no minor unit).
+//  * Published, orderable listings must have dataStatus APPROVED, an approved
+//    price and stock. REFERENCE listings are catalogue research; DEMO listings
+//    are clearly labelled demonstration data.
+//  * Administrative actions that change money, stock or access are recorded in
+//    AuditLog so a trail always exists.
+// ---------------------------------------------------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // DATABASE_URL is the connection the application uses. On Supabase that is
+  // the pooled (PgBouncer, port 6543) URI.
+  url      = env("DATABASE_URL")
+  // DIRECT_URL is used only by migrations, which cannot run through PgBouncer.
+  // On Supabase that is the direct connection (port 5432). Locally both point
+  // at the same server.
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+enum ProductDataStatus {
+  APPROVED // price and content approved by Uthman IY
+  REFERENCE // imported reference catalogue research, not an Uthman IY price
+  DEMO // clearly labelled demonstration listing, never real inventory
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  PROCESSING
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH_ON_DELIVERY
+  MANUAL_MOBILE_MONEY
+  MANUAL_AIRTEL_MONEY
+  BANK_TRANSFER
+  MTN_MOMO_API
+}
+
+/// Delivery is agreed by phone for nationwide orders, so the fee has an
+/// explicit state rather than being silently assumed to be zero.
+enum DeliveryFeeStatus {
+  /// Kept for historical rows created before free delivery was introduced.
+  PENDING_AGREEMENT
+  AGREED
+  WAIVED
+  /// Delivery is free across Rwanda: no fee is charged or agreed.
+  FREE
+}
+
+enum InquiryType {
+  PRODUCT_ENQUIRY
+  ORDER_SUPPORT
+  SOFTWARE_DEVELOPMENT
+  MATCHVISION_AI
+  DIGITAL_DISCIPLINE
+  TENDER_AI
+  PARTNERSHIP
+  OTHER
+}
+
+enum InquiryStatus {
+  NEW
+  IN_REVIEW
+  CLOSED
+  SPAM
+}
+
+enum SoftwareStatus {
+  UPCOMING
+  IN_DEVELOPMENT
+  TESTING
+  LIVE
+}
+
+enum FeatureStatus {
+  LIVE
+  EXPERIMENTAL
+  PLANNED
+}
+
+enum StockMovementReason {
+  INITIAL_STOCK
+  MANUAL_ADJUSTMENT
+  ORDER_PLACED
+  ORDER_CANCELLED
+  IMPORT
+  RETURN
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(STAFF)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  sessions       Session[]
+  auditLogs      AuditLog[]
+  orderEvents    OrderEvent[]
+  stockMovements StockMovement[]
+  inquiries      Inquiry[]       @relation("InquiryHandler")
+
+  @@index([role])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  products Product[]
+
+  @@index([sortOrder])
+}
+
+model Product {
+  id                   String            @id @default(cuid())
+  slug                 String            @unique
+  name                 String
+  sku                  String?           @unique
+  shortDescription     String            @default("")
+  description          String            @default("")
+  // Array of { label: string, value: string } entries.
+  specifications       Json              @default("[]")
+  priceRwf             Int? // approved selling price, null until the owner approves
+  compareAtPriceRwf    Int?
+  stock                Int               @default(0)
+  lowStockThreshold    Int               @default(5)
+  isPublished          Boolean           @default(false)
+  dataStatus           ProductDataStatus @default(DEMO)
+  referencePriceRwf    Int?
+  referenceSource      String?
+  referenceRetrievedAt DateTime?
+  categoryId           String?
+  category             Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  imageUrl             String?
+  imageAlt             String?
+  featured             Boolean           @default(false)
+  archivedAt           DateTime?
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  orderItems     OrderItem[]
+  stockMovements StockMovement[]
+
+  @@index([categoryId])
+  @@index([isPublished, archivedAt])
+  @@index([dataStatus])
+}
+
+model DeliveryArea {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  feeRwf    Int      @default(0)
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
+}
+
+model Order {
+  id                 String        @id @default(cuid())
+  orderNumber        String        @unique
+  status             OrderStatus   @default(PENDING_PAYMENT)
+  paymentStatus      PaymentStatus @default(UNPAID)
+  paymentMethod      PaymentMethod
+  customerName       String
+  customerEmail      String
+  customerPhone      String
+  deliveryAddress    String
+  deliveryNotes      String?
+  deliveryAreaId     String?
+  deliveryArea       DeliveryArea? @relation(fields: [deliveryAreaId], references: [id], onDelete: SetNull)
+  deliveryAreaName   String
+  subtotalRwf        Int
+  deliveryFeeRwf     Int           @default(0)
+  totalRwf           Int
+  deliveryFeeStatus  DeliveryFeeStatus @default(PENDING_AGREEMENT)
+  /// Amount agreed with the customer by phone (null until agreed).
+  deliveryFeeAgreedRwf Int?
+  deliveryFeeAgreedAt  DateTime?
+  deliveryFeeAgreedBy  String?
+  // Customer reference for manual transfers / mobile money payments.
+  paymentReference   String?
+  // Provider-side identifier (e.g. MTN referenceId) when an API integration runs.
+  paymentProviderRef String?
+  paidAt             DateTime?
+  paymentConfirmedBy String?
+  idempotencyKey     String?       @unique
+  adminNotes         String?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  items          OrderItem[]
+  events         OrderEvent[]
+  stockMovements StockMovement[]
+  paymentEvents  PaymentEvent[]
+
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([createdAt])
+  @@index([customerEmail])
+  @@index([customerPhone])
+}
+
+model OrderItem {
+  id           String   @id @default(cuid())
+  orderId      String
+  order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName  String
+  sku          String?
+  unitPriceRwf Int
+  quantity     Int
+  lineTotalRwf Int
+
+  @@index([orderId])
+}
+
+model OrderEvent {
+  id         String   @id @default(cuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type       String
+  message    String
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorLabel String?
+  createdAt  DateTime @default(now())
+
+  @@index([orderId])
+}
+
+model StockMovement {
+  id        String              @id @default(cuid())
+  productId String
+  product   Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  delta     Int
+  reason    StockMovementReason
+  note      String?
+  orderId   String?
+  order     Order?              @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  actorId   String?
+  actor     User?               @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  createdAt DateTime            @default(now())
+
+  @@index([productId])
+  @@index([orderId])
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  type        InquiryType
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  subject     String?
+  message     String
+  productSlug String?
+  sourcePath  String?
+  status      InquiryStatus @default(NEW)
+  adminNotes  String?
+  handledById String?
+  handledBy   User?         @relation("InquiryHandler", fields: [handledById], references: [id], onDelete: SetNull)
+  handledAt   DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([type])
+  @@index([createdAt])
+}
+
+model SoftwareProduct {
+  id          String         @id @default(cuid())
+  slug        String         @unique
+  name        String
+  tagline     String
+  summary     String
+  description String
+  status      SoftwareStatus @default(UPCOMING)
+  // Plain-language explanation of what the status means for visitors.
+  statusNote  String         @default("")
+  // JSON string[] of audience groups.
+  audience    Json           @default("[]")
+  // JSON array of { title, description, status: LIVE|EXPERIMENTAL|PLANNED }.
+  features    Json           @default("[]")
+  demoUrl     String?
+  ctaLabel    String         @default("Request early access")
+  isPublished Boolean        @default(true)
+  sortOrder   Int            @default(0)
+  accentColor String         @default("#2148dd")
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model Service {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  summary      String
+  description  String
+  // JSON string[] of business benefits.
+  benefits     Json     @default("[]")
+  // JSON string[] of deliverables / what the engagement includes.
+  deliverables Json     @default("[]")
+  icon         String   @default("code")
+  isPublished  Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSetting {
+  key         String   @id
+  // JSON encoded value so settings can be strings, numbers or objects.
+  value       Json
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorEmail String?
+  action     String
+  entityType String
+  entityId   String?
+  // JSON object with before/after snapshots or relevant metadata.
+  metadata   Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entityType, entityId])
+}
+
+/// Reference catalogue research. Deliberately a separate table so imported
+/// third-party prices can never be mistaken for Uthman IY selling prices.
+model ReferenceCatalogItem {
+  id                 String   @id @default(cuid())
+  externalId         String   @unique
+  source             String
+  sourceUrl          String
+  retrievedAt        DateTime
+  title              String
+  category           String
+  categorySlug       String
+  referencePriceRwf  Int?
+  currency           String   @default("RWF")
+  notes              String?
+  convertedProductId String?
+  createdAt          DateTime @default(now())
+
+  @@index([categorySlug])
+}
+
+/// Idempotency + audit trail for payment provider notifications.
+model PaymentEvent {
+  id        String   @id @default(cuid())
+  provider  String
+  eventId   String
+  orderId   String?
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  verified  Boolean  @default(false)
+  payload   Json?
+  createdAt DateTime @default(now())
+
+  @@unique([provider, eventId])
+  @@index([orderId])
+}
+
+/// Durable rate-limit buckets. Using the database keeps the limit effective
+/// across serverless instances without a paid Redis service.
+model RateLimitBucket {
+  key       String   @id
+  count     Int      @default(0)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}

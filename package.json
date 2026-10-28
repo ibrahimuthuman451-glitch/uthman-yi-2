@@ -1,0 +1,74 @@
+{
+  "name": "uthman-iy-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Uthman IY company website, technology shop, software products and administration platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --pool=forks --maxWorkers=2",
+    "test:watch": "vitest",
+    "db:start": "node scripts/dev-db.mjs",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
+    "db:seed:prod": "tsx prisma/seed.ts --production",
+    "db:studio": "prisma studio",
+    "smoke": "node scripts/smoke-test.mjs",
+    "build:ci": "NODE_OPTIONS=--max-old-space-size=2048 prisma generate && NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=2048 next build",
+    "catalogue:apply": "tsx --tsconfig tsconfig.scripts.json scripts/import-owner-catalogue.ts",
+    "db:check": "node scripts/db-check.mjs",
+    "photos:download": "node scripts/drive-folder.mjs",
+    "photos:match": "tsx --tsconfig tsconfig.scripts.json scripts/import-product-photos.ts",
+    "photos:apply": "tsx --tsconfig tsconfig.scripts.json scripts/import-product-photos.ts --apply",
+    "photos:map": "tsx --tsconfig tsconfig.scripts.json scripts/map-drive-photos.ts",
+    "photos:urls": "tsx --tsconfig tsconfig.scripts.json scripts/apply-photo-urls.ts",
+    "delivery:free": "tsx --tsconfig tsconfig.scripts.json scripts/apply-free-delivery.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "bcryptjs": "3.0.3",
+    "clsx": "2.1.1",
+    "jose": "6.2.13",
+    "next": "15.5.28",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "server-only": "^0.0.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "@types/react": "19.1.17",
+    "@types/react-dom": "19.1.11",
+    "autoprefixer": "10.4.21",
+    "dotenv": "17.2.3",
+    "embedded-postgres": "17.10.0-beta.17",
+    "eslint": "9.39.1",
+    "eslint-config-next": "15.5.28",
+    "postcss": "8.5.6",
+    "prisma": "6.19.3",
+    "tailwindcss": "3.4.19",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4",
+    "sharp": "0.35.5"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "allowScripts": {
+    "prisma@6.19.3": true,
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "unrs-resolver@1.12.2": true,
+    "@embedded-postgres/linux-x64@17.10.0-beta.17": true
+  }
+}

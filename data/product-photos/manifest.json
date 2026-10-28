@@ -1,0 +1,548 @@
+{
+  "generatedAt": "2026-10-28T01:01:25.564Z",
+  "sourceDir": "photos-in",
+  "strategy": "exact-image-name",
+  "entries": [
+    {
+      "file": "imgi_26_xjekgqsx9rsd484ohwfy.jpg",
+      "slug": "4-mp-colorvu-with-smart-hybrid-light-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/4-mp-colorvu-with-smart-hybrid-light-fixed-bullet-network-camera.webp",
+      "width": 1080,
+      "height": 1080,
+      "bytes": 14146
+    },
+    {
+      "file": "imgi_62_ysztg6j7wckqeep3zuub.png",
+      "slug": "hikvision-16-ch-1u-h-265-acusense-dvr",
+      "applied": true,
+      "output": "/products/hikvision-16-ch-1u-h-265-acusense-dvr.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 2768
+    },
+    {
+      "file": "imgi_34_kzmqbndaf5rfyzazlnva.png",
+      "slug": "hikvision-16-channel-4k-poe-nvr-ds-7616nxi-k2-16p-d",
+      "applied": true,
+      "output": "/products/hikvision-16-channel-4k-poe-nvr-ds-7616nxi-k2-16p-d.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 4912
+    },
+    {
+      "file": "imgi_20_xp6vey1zc2pa2fnizjgt.png",
+      "slug": "hikvision-2-mp-fixed-outdoor-smart-hybrid-light-wi-fi-pt-network-camer",
+      "applied": true,
+      "output": "/products/hikvision-2-mp-fixed-outdoor-smart-hybrid-light-wi-fi-pt-network-camer.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 23408
+    },
+    {
+      "file": "imgi_53_hz89kxnbboxn4urjrtcr.png",
+      "slug": "hikvision-2mp-colorvu-3-0-acuseek-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-colorvu-3-0-acuseek-fixed-bullet-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6152
+    },
+    {
+      "file": "imgi_42_alluwoao6aj1jsrrykcp.png",
+      "slug": "hikvision-2mp-colorvu-3-0-fixed-bullet-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-colorvu-3-0-fixed-bullet-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 4978
+    },
+    {
+      "file": "imgi_48_jmuziivt16qgyfupnhnh.png",
+      "slug": "hikvision-2mp-colorvu-3-0-fixed-dome-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-colorvu-3-0-fixed-dome-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 11990
+    },
+    {
+      "file": "imgi_46_kharn06davtkjmmfbu6n.png",
+      "slug": "hikvision-2mp-colorvu-3-0-fixed-turret-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-colorvu-3-0-fixed-turret-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 10534
+    },
+    {
+      "file": "imgi_35_jp5v3i9hzk3ovhiz34sv.png",
+      "slug": "hikvision-2mp-colorvu-smart-hybrid-light-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-colorvu-smart-hybrid-light-fixed-bullet-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6702
+    },
+    {
+      "file": "imgi_32_xukqthwkiimsirxy2sjq.png",
+      "slug": "hikvision-2mp-smart-hybrid-light-audio-fixed-mini-bullet-turbo-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-smart-hybrid-light-audio-fixed-mini-bullet-turbo-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6730
+    },
+    {
+      "file": "imgi_31_ybzw5d3iei2vjyubmzsp.png",
+      "slug": "hikvision-2mp-smart-hybrid-light-audio-fixed-turret-camera",
+      "applied": true,
+      "output": "/products/hikvision-2mp-smart-hybrid-light-audio-fixed-turret-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 9286
+    },
+    {
+      "file": "imgi_61_jwufdqajccdagpoywrqp.png",
+      "slug": "hikvision-32-ch-1080p-1u-h-265-acusense-dvr",
+      "applied": true,
+      "output": "/products/hikvision-32-ch-1080p-1u-h-265-acusense-dvr.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 3694
+    },
+    {
+      "file": "imgi_12_Hikvision-DS-J142I-7204HGHI-M1_1_gbhsxr.jpg",
+      "slug": "hikvision-4ch-kit-colorvu-ds-j142i-7204hghim1-2-2cam-colorvu",
+      "applied": true,
+      "output": "/products/hikvision-4ch-kit-colorvu-ds-j142i-7204hghim1-2-2cam-colorvu.webp",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 36010
+    },
+    {
+      "file": "imgi_52_kbt6yqsidm5ebv6rwarl.png",
+      "slug": "hikvision-4mp-colorvu-3-0-acuseek-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-4mp-colorvu-3-0-acuseek-fixed-bullet-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6154
+    },
+    {
+      "file": "imgi_51_xezdshdyptkfgg0k3ad7.png",
+      "slug": "hikvision-4mp-colorvu-3-0-acuseek-fixed-bullet-strobe-light-camera",
+      "applied": true,
+      "output": "/products/hikvision-4mp-colorvu-3-0-acuseek-fixed-bullet-strobe-light-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6152
+    },
+    {
+      "file": "imgi_45_utl5wgv9m2xtjlwfq0kw.png",
+      "slug": "hikvision-4mp-colorvu-3-0-fixed-turret-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-4mp-colorvu-3-0-fixed-turret-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 10746
+    },
+    {
+      "file": "imgi_37_qrjw0eyllw55z43onhm4.png",
+      "slug": "hikvision-4mp-colorvu-smart-hybrid-light-fixed-dome-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-4mp-colorvu-smart-hybrid-light-fixed-dome-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 11990
+    },
+    {
+      "file": "imgi_15_HIKVISION_4MP_FIXED_OUTDOOR_IR_WIFI_STAND_nn94oh.png",
+      "slug": "hikvision-4mp-fixed-outdoor-ir-wifi-stand-alone-pt-network-camera-ds-2",
+      "applied": true,
+      "output": "/products/hikvision-4mp-fixed-outdoor-ir-wifi-stand-alone-pt-network-camera-ds-2.webp",
+      "width": 928,
+      "height": 1200,
+      "bytes": 17456
+    },
+    {
+      "file": "imgi_65_ig20endhirpd13rbgzz7.png",
+      "slug": "hikvision-4mp-h-265-bullet-wifi-nvr-4ch-kit",
+      "applied": true,
+      "output": "/products/hikvision-4mp-h-265-bullet-wifi-nvr-4ch-kit.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 12022
+    },
+    {
+      "file": "imgi_64_hfhvqxr0yj0uq4j5qrns.png",
+      "slug": "hikvision-4mp-h-265-dome-wifi-nvr-4ch-kit",
+      "applied": true,
+      "output": "/products/hikvision-4mp-h-265-dome-wifi-nvr-4ch-kit.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 13690
+    },
+    {
+      "file": "imgi_54_gcumbetui1wjamtevi7i.png",
+      "slug": "hikvision-4mp-h-265-two-bullet-wifi-nvs-kit",
+      "applied": true,
+      "output": "/products/hikvision-4mp-h-265-two-bullet-wifi-nvs-kit.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 18924
+    },
+    {
+      "file": "imgi_41_hd17kucys9iprpc85exb.png",
+      "slug": "hikvision-4mp-smart-hybrid-light-with-colorvu-fixed-mini-bullet-networ",
+      "applied": true,
+      "output": "/products/hikvision-4mp-smart-hybrid-light-with-colorvu-fixed-mini-bullet-networ.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 7552
+    },
+    {
+      "file": "imgi_63_rpbombka3jos1pimakbt.png",
+      "slug": "hikvision-64-channel-1-5u-m-series-8k-network-video-recorder",
+      "applied": true,
+      "output": "/products/hikvision-64-channel-1-5u-m-series-8k-network-video-recorder.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 3542
+    },
+    {
+      "file": "imgi_49_nswmjahryzvbsro2ve1i.png",
+      "slug": "hikvision-6mp-colorvu-3-0-acuseek-fixed-bullet-strobe-light-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-3-0-acuseek-fixed-bullet-strobe-light-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6152
+    },
+    {
+      "file": "imgi_50_kgmignlgog1v1fjocs6t.png",
+      "slug": "hikvision-6mp-colorvu-3-0-fixed-bullet-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-3-0-fixed-bullet-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6154
+    },
+    {
+      "file": "imgi_47_whdsjqdma6yattonkgg1.png",
+      "slug": "hikvision-6mp-colorvu-3-0-fixed-dome-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-3-0-fixed-dome-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 12486
+    },
+    {
+      "file": "imgi_43_f2oqvnedxnyr0fpf8rp7.png",
+      "slug": "hikvision-6mp-colorvu-3-0-fixed-turret-acuseek-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-3-0-fixed-turret-acuseek-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 10366
+    },
+    {
+      "file": "imgi_43_f2oqvnedxnyr0fpf8rp7.png",
+      "slug": "hikvision-6mp-colorvu-3-0-fixed-turret-acuseek-network-camera-2",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-3-0-fixed-turret-acuseek-network-camera-2.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 10366
+    },
+    {
+      "file": "imgi_36_vlawzfx33of416era5jm.png",
+      "slug": "hikvision-6mp-colorvu-smart-hybrid-light-fixed-dome-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-colorvu-smart-hybrid-light-fixed-dome-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 11990
+    },
+    {
+      "file": "imgi_39_cdjile6prtvzilfbviof.png",
+      "slug": "hikvision-6mp-dual-light-motion-2-0-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-6mp-dual-light-motion-2-0-fixed-bullet-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6430
+    },
+    {
+      "file": "imgi_13_hikvision-DS-J142I-7204HGHI-M1-8ch_2_ppeaj5.jpg",
+      "slug": "hikvision-8ch-kit-colorvu-ds-j142i-7208hghi-m1-4-4-cam",
+      "applied": true,
+      "output": "/products/hikvision-8ch-kit-colorvu-ds-j142i-7208hghi-m1-4-4-cam.webp",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 46108
+    },
+    {
+      "file": "imgi_38_yhcui2pogy2forfvmwjv.png",
+      "slug": "hikvision-8mp-dual-light-motion-2-0-fixed-bullet-network-camera",
+      "applied": true,
+      "output": "/products/hikvision-8mp-dual-light-motion-2-0-fixed-bullet-network-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 6430
+    },
+    {
+      "file": "imgi_40_bxxpxtecavabgfthp3fu.png",
+      "slug": "hikvision-8mp-smart-hybrid-light-with-colorvu-motorized-varifocal-bull",
+      "applied": true,
+      "output": "/products/hikvision-8mp-smart-hybrid-light-with-colorvu-motorized-varifocal-bull.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 7350
+    },
+    {
+      "file": "imgi_18_HIKVISION_AX_Hybrid_Pro_Kit_ayywsa.webp",
+      "slug": "hikvision-ax-hybrid-pro-kit",
+      "applied": true,
+      "output": "/products/hikvision-ax-hybrid-pro-kit.webp",
+      "width": 600,
+      "height": 600,
+      "bytes": 10712
+    },
+    {
+      "file": "imgi_11_HIKVISION_8MP_4K_CCTV_DS-2CE12UF3T-E_COLORVU_TVI_PoC_BULLET_CAMERA_40M_SMART_IR___eBay_qlv5qt.jpg",
+      "slug": "hikvision-ds-2cd1047g2h-liu-color-vu-with-smart-hybrid-4mp-bullet",
+      "applied": true,
+      "output": "/products/hikvision-ds-2cd1047g2h-liu-color-vu-with-smart-hybrid-4mp-bullet.webp",
+      "width": 736,
+      "height": 736,
+      "bytes": 8638
+    },
+    {
+      "file": "imgi_6_Hikvision_DS-2CD2143G2-I_2_8mm_q7bf9i.jpg",
+      "slug": "hikvision-ds-2cd1347g2h-liu-color-vu-with-smart-hybrid-4mp-dome",
+      "applied": true,
+      "output": "/products/hikvision-ds-2cd1347g2h-liu-color-vu-with-smart-hybrid-4mp-dome.webp",
+      "width": 511,
+      "height": 476,
+      "bytes": 12120
+    },
+    {
+      "file": "imgi_19_HIKVISION_DS-KIS313-P_B_Hybrid_HD_Intercom_Kit_kdq8zx.png",
+      "slug": "hikvision-ds-kis313-p-b-hybrid-hd-intercom-kit",
+      "applied": true,
+      "output": "/products/hikvision-ds-kis313-p-b-hybrid-hd-intercom-kit.webp",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 48222
+    },
+    {
+      "file": "imgi_16_HIKVISION_DS-UPS1000VA_ojb6cz.jpg",
+      "slug": "hikvision-ds-ups1000va",
+      "applied": true,
+      "output": "/products/hikvision-ds-ups1000va.webp",
+      "width": 708,
+      "height": 836,
+      "bytes": 39232
+    },
+    {
+      "file": "imgi_17_HIKVISION_DS-UPS2000VA_rqbjxd.jpg",
+      "slug": "hikvision-ds-ups2000-va",
+      "applied": true,
+      "output": "/products/hikvision-ds-ups2000-va.webp",
+      "width": 708,
+      "height": 836,
+      "bytes": 39232
+    },
+    {
+      "file": "imgi_14_NVR-HIKVISION-DS-7616NI-Q2-IP-1-1_emwbu4.jpg",
+      "slug": "hikvision-nvr-ds-7616ni-q2-16p",
+      "applied": true,
+      "output": "/products/hikvision-nvr-ds-7616ni-q2-16p.webp",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 24462
+    },
+    {
+      "file": "imgi_33_ukzhzz0xliqucxvoqhas.png",
+      "slug": "hikvision-tandemvu-4-4mp-15x-colorvu-ir-acusense-network-speed-dome",
+      "applied": true,
+      "output": "/products/hikvision-tandemvu-4-4mp-15x-colorvu-ir-acusense-network-speed-dome.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 8310
+    },
+    {
+      "file": "imgi_30_o7ppbfxignpxgnlmgsae.png",
+      "slug": "imou-10mp-dual-lens-solar-security-camera",
+      "applied": true,
+      "output": "/products/imou-10mp-dual-lens-solar-security-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 72462
+    },
+    {
+      "file": "imgi_59_dlohdx4urqgbitwjmzf2.png",
+      "slug": "imou-3k-5mp-ranger-2-wifi-camera",
+      "applied": true,
+      "output": "/products/imou-3k-5mp-ranger-2-wifi-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 13954
+    },
+    {
+      "file": "imgi_56_owst0cciy4duxi4xrxhv.png",
+      "slug": "imou-3mp-cruiser-sc-wifi-pt-camera",
+      "applied": true,
+      "output": "/products/imou-3mp-cruiser-sc-wifi-pt-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 23560
+    },
+    {
+      "file": "imgi_55_z7u8tlfs7kvzp8j7cj0n.png",
+      "slug": "imou-5mp-cruiser-sc-wifi-pt-camera",
+      "applied": true,
+      "output": "/products/imou-5mp-cruiser-sc-wifi-pt-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 23322
+    },
+    {
+      "file": "imgi_57_iplpt7hnrzpzkirgvq4h.png",
+      "slug": "imou-5mp-wi-fi-bullet-camera",
+      "applied": true,
+      "output": "/products/imou-5mp-wi-fi-bullet-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 49326
+    },
+    {
+      "file": "imgi_58_qmwogpjh2uwh1vekiuf8.png",
+      "slug": "imou-bullet-2e-3mp-outdoor-wifi-ip-camera",
+      "applied": true,
+      "output": "/products/imou-bullet-2e-3mp-outdoor-wifi-ip-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 48448
+    },
+    {
+      "file": "imgi_29_zfwlwbmy1mkgh1mkk1ez.png",
+      "slug": "imou-bullet-3-5mp-wifi-camera",
+      "applied": true,
+      "output": "/products/imou-bullet-3-5mp-wifi-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 44894
+    },
+    {
+      "file": "imgi_28_b4bcwgd2blpuw5g3meu8.png",
+      "slug": "imou-bullet-3-wifi-3mp-camera",
+      "applied": true,
+      "output": "/products/imou-bullet-3-wifi-3mp-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 50074
+    },
+    {
+      "file": "imgi_27_pn4qf2u8wasursh6egmx.png",
+      "slug": "imou-cruiser-10mp-5-5mp-dual-lens-ptz-camera",
+      "applied": true,
+      "output": "/products/imou-cruiser-10mp-5-5mp-dual-lens-ptz-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 60912
+    },
+    {
+      "file": "imgi_25_mfoabqhdc7rlligiiz3k.png",
+      "slug": "imou-cruiser-11mp-3mp-3mp-5mp-triple-ptz-camera",
+      "applied": true,
+      "output": "/products/imou-cruiser-11mp-3mp-3mp-5mp-triple-ptz-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 64116
+    },
+    {
+      "file": "imgi_24_eab3vtubiprqrckmhi11.png",
+      "slug": "imou-cruiser-dual-2-6mp-ptz-smart-security-camera",
+      "applied": true,
+      "output": "/products/imou-cruiser-dual-2-6mp-ptz-smart-security-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 63172
+    },
+    {
+      "file": "imgi_60_r0eouexylzwdwbqromwm.png",
+      "slug": "imou-ranger-2-3mp-2k-indoor-wi-fi-security-camera",
+      "applied": true,
+      "output": "/products/imou-ranger-2-3mp-2k-indoor-wi-fi-security-camera.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 14220
+    },
+    {
+      "file": "imgi_23_kilnvtbhcfjbshmml7j2.png",
+      "slug": "imou-ranger-2-dual-10mp-wi-fi-indoor-camera",
+      "applied": true,
+      "output": "/products/imou-ranger-2-dual-10mp-wi-fi-indoor-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 38536
+    },
+    {
+      "file": "imgi_22_szelk8fbvuuxfuoif9by.png",
+      "slug": "imou-ranger-2-pro-5mp-indoor-camera",
+      "applied": true,
+      "output": "/products/imou-ranger-2-pro-5mp-indoor-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 38530
+    },
+    {
+      "file": "imgi_21_b10r8p69csbm3udksn7l.png",
+      "slug": "imou-ranger-mini-3mp-integrated-bracket-indoor-camera",
+      "applied": true,
+      "output": "/products/imou-ranger-mini-3mp-integrated-bracket-indoor-camera.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 53466
+    },
+    {
+      "file": "imgi_5_61hchLBV8HL._AC_UF894_1000_QL80__1_uyxxot.jpg",
+      "slug": "starlink-ethernet-adapter",
+      "applied": true,
+      "output": "/products/starlink-ethernet-adapter.webp",
+      "width": 894,
+      "height": 850,
+      "bytes": 39862
+    },
+    {
+      "file": "imgi_3_Starlink_Standard_Hero_500x500_1_lg1wrx.png",
+      "slug": "starlink-kit-v4",
+      "applied": true,
+      "output": "/products/starlink-kit-v4.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 7212
+    },
+    {
+      "file": "imgi_4_Starlink_Mini_500x500_nalu14.png",
+      "slug": "starlink-mini",
+      "applied": true,
+      "output": "/products/starlink-mini.webp",
+      "width": 500,
+      "height": 500,
+      "bytes": 3124
+    },
+    {
+      "file": "imgi_2_41lrnVpO5PL._AC_UF894_1000_QL80__sl7exu.png",
+      "slug": "starlink-mini-router",
+      "applied": true,
+      "output": "/products/starlink-mini-router.webp",
+      "width": 1200,
+      "height": 1200,
+      "bytes": 18112
+    }
+  ],
+  "missing": []
+}
