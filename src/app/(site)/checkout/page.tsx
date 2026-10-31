@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getEnv } from "@/lib/env";
+import { getEnv, type AppEnv } from "@/lib/env";
 import { getSiteSettings } from "@/lib/settings";
 import { buildPaymentOptions } from "@/lib/payments/options";
 import { listDeliveryAreas } from "@/server/services/orders";
 import { CheckoutForm } from "@/components/shop/checkout-form";
 import { Alert } from "@/components/ui/alert";
+import { formatPhone, toInternationalPhone } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,65 @@ export const metadata: Metadata = {
 
 export default async function CheckoutPage() {
   const settings = await getSiteSettings();
-  const env = getEnv();
+
+  /**
+   * A missing environment variable must never take the money page down with a
+   * server error: that hides the problem from the owner and tells the customer
+   * nothing. Validate here, log which variable is wrong (names only, never
+   * values), and keep the page usable with a clear "call us" fallback.
+   */
+  let env: AppEnv | null = null;
+  try {
+    env = getEnv();
+  } catch (error) {
+    console.error(
+      "[checkout] environment configuration is incomplete:",
+      error instanceof Error ? error.message : error,
+    );
+  }
+
+  if (!env) {
+    const phone = settings.company.phone;
+    const whatsapp = toInternationalPhone(settings.company.whatsappPhone || phone);
+    return (
+      <div className="bg-surface">
+        <div className="container-page py-10 sm:py-14">
+          <h1 className="text-3xl font-bold text-navy-900 sm:text-4xl">Checkout</h1>
+          <Alert tone="warning" className="mt-6" title="Online checkout is unavailable right now">
+            We could not load online checkout. Please call{" "}
+            <a className="font-semibold underline" href={`tel:${phone}`}>
+              {formatPhone(phone)}
+            </a>{" "}
+            or{" "}
+            <a
+              className="font-semibold underline"
+              href={`https://wa.me/${whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              message us on WhatsApp
+            </a>{" "}
+            and we will complete your order. Nothing has been charged.
+          </Alert>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/cart"
+              className="inline-flex items-center justify-center rounded-xl border border-navy-200 bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 hover:border-brand-300 hover:bg-brand-50"
+            >
+              ← Back to cart
+            </Link>
+            <Link
+              href="/shop"
+              className="inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
+            >
+              Continue shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const [areas, options] = await Promise.all([
     listDeliveryAreas(),
     Promise.resolve(buildPaymentOptions(settings, env)),
