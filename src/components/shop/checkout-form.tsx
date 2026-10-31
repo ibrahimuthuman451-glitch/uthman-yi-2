@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Checkbox, Field, Input, Select, Textarea } from "@/components/ui/field";
 import { formatRwf } from "@/lib/money";
+import { buildMomoTransferPrompt } from "@/lib/payments/ussd";
+import { UssdPayButton } from "@/components/shop/ussd-pay-button";
 import type { PaymentMethod } from "@prisma/client";
 
 type DeliveryArea = { id: string; name: string; feeRwf: number; notes: string | null };
@@ -40,6 +42,8 @@ export function CheckoutForm({
   bankDetails,
   deliveryNotice,
   stockMode,
+  momoNumber,
+  momoUssdTemplate,
 }: {
   areas: DeliveryArea[];
   paymentOptions: PaymentOption[];
@@ -47,6 +51,8 @@ export function CheckoutForm({
   bankDetails: { bankName: string; accountName: string; accountNumber: string } | null;
   deliveryNotice: string;
   stockMode: "TRACKED" | "ON_REQUEST";
+  momoNumber: string;
+  momoUssdTemplate?: string;
 }) {
   const { items, ready, clearCart } = useCart();
   const [state, formAction, pending] = useActionState(placeOrderAction, initialActionState);
@@ -56,6 +62,12 @@ export function CheckoutForm({
     paymentOptions[0]?.method ?? "CASH_ON_DELIVERY",
   );
   const [checking, setChecking] = useState(true);
+  /**
+   * Payment comes first: the customer pays by MoMo, then says so, and only then
+   * sees the delivery and contact fields. `stage` is deliberately client-side -
+   * the order is still created with a full server-side validation pass.
+   */
+  const [stage, setStage] = useState<"pay" | "details">("pay");
   const [idempotencyKey] = useState(() =>
     typeof crypto !== "undefined" && "randomUUID" in crypto
       ? crypto.randomUUID()
@@ -122,6 +134,18 @@ export function CheckoutForm({
   const total = subtotal + deliveryFee;
   const hasDemo = lines.some((line) => line.server?.isDemo);
 
+  // One-tap MoMo payment for the whole checkout total, offered before the
+  // delivery and contact fields so the customer can pay immediately.
+  const momoPrompt =
+    !blocked && total > 0
+      ? buildMomoTransferPrompt({
+          msisdn: momoNumber,
+          amountRwf: total,
+          template: momoUssdTemplate,
+        })
+      : null;
+  const payFirst = stage === "pay" && momoPrompt !== null;
+
   if (!ready) {
     return (
       <div className="rounded-2xl border border-navy-100 bg-white p-10 text-center text-sm text-muted">
@@ -171,6 +195,53 @@ export function CheckoutForm({
           </Alert>
         ) : null}
 
+        {payFirst ? (
+          <section className="rounded-2xl border border-brand-200 bg-white p-5 sm:p-6">
+            <h2 className="text-base font-semibold text-navy-900">
+              Pay {formatRwf(total)} with MTN MoMo
+            </h2>
+            <p className="mt-1 text-sm text-muted">
+              Pay first, then tell us where to deliver. Keep the SMS reference — you will paste it
+              after this step.
+            </p>
+
+            <ul className="mt-4 space-y-2 rounded-xl bg-surface p-4 text-sm">
+              {lines.map(({ item, server }) => (
+                <li key={item.productId} className="flex justify-between gap-3">
+                  <span className="min-w-0 text-navy-800">
+                    {server?.name ?? item.name}{" "}
+                    <span className="text-muted">× {item.quantity}</span>
+                  </span>
+                  <span className="whitespace-nowrap font-medium text-navy-900">
+                    {formatRwf((server?.priceRwf ?? item.priceRwf ?? 0) * item.quantity)}
+                  </span>
+                </li>
+              ))}
+              <li className="flex justify-between gap-3 border-t border-navy-100 pt-2 font-semibold text-navy-900">
+                <span>Total</span>
+                <span>{formatRwf(total)}</span>
+              </li>
+            </ul>
+
+            <UssdPayButton prompt={momoPrompt} className="mt-4" label={`Pay ${formatRwf(total)} now`} />
+
+            <div className="mt-4 grid gap-2">
+              <Button type="button" size="lg" className="w-full" onClick={() => setStage("details")}>
+                I have paid — continue
+              </Button>
+              <button
+                type="button"
+                onClick={() => setStage("details")}
+                className="text-sm font-medium text-navy-600 underline underline-offset-4 hover:text-navy-900"
+              >
+                I will pay later
+              </button>
+            </div>
+          </section>
+        ) : null}
+
+        {!payFirst ? (
+          <>
         <section className="rounded-2xl border border-navy-100 bg-white p-5 sm:p-6">
           <h2 className="text-base font-semibold text-navy-900">Your details</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -283,8 +354,11 @@ export function CheckoutForm({
             </div>
           ) : null}
         </section>
+          </>
+        ) : null}
       </div>
 
+      {!payFirst ? (
       <aside className="rounded-2xl border border-navy-100 bg-white p-5 shadow-card sm:p-6 lg:sticky lg:top-24">
         <h2 className="text-base font-semibold text-navy-900">Order summary</h2>
         <ul className="mt-4 space-y-3 text-sm">
@@ -364,6 +438,7 @@ export function CheckoutForm({
           only marked as received after our team or the provider confirms it.
         </p>
       </aside>
+      ) : null}
     </form>
   );
 }

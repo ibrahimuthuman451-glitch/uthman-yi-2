@@ -133,6 +133,8 @@ export default async function CheckoutPage() {
               }
               deliveryNotice={settings.store.deliveryNotice}
               stockMode={settings.store.stockMode}
+              momoNumber={settings.payments.manualMobileMoney.mtnNumber}
+              momoUssdTemplate={settings.payments.manualMobileMoney.ussdTemplate}
             />
           )}
         </div>
