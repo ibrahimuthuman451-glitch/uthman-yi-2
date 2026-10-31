@@ -35,6 +35,8 @@ type CartContextValue = {
   subtotalRwf: number;
   ready: boolean;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
+  /** Replaces the cart with one product (used by "Buy now"). */
+  buyNow: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (productId: string) => void;
   setQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -95,6 +97,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  /**
+   * Replaces the cart with a single product and persists it synchronously.
+   *
+   * "Buy now" navigates to checkout in the same tick as the click, so relying on
+   * the effect that writes localStorage could let checkout mount against the
+   * previous (or empty) cart and show "Your cart is empty". Writing here removes
+   * that race and keeps the in-memory and stored carts identical.
+   */
+  const buyNow = useCallback((item: Omit<CartItem, "quantity">, quantity = 1) => {
+    const next: CartItem[] = [
+      {
+        ...item,
+        quantity: Math.min(MAX_PER_ITEM, Math.max(1, quantity)),
+      },
+    ];
+    setItems(next);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      // Storage may be unavailable (private mode); the in-memory cart still works.
+    }
+  }, []);
+
   const removeItem = useCallback((productId: string) => {
     setItems((current) => current.filter((entry) => entry.productId !== productId));
   }, []);
@@ -119,8 +144,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       (total, entry) => total + (entry.priceRwf ?? 0) * entry.quantity,
       0,
     );
-    return { items, itemCount, subtotalRwf, ready, addItem, removeItem, setQuantity, clearCart };
-  }, [items, ready, addItem, removeItem, setQuantity, clearCart]);
+    return { items, itemCount, subtotalRwf, ready, addItem, buyNow, removeItem, setQuantity, clearCart };
+  }, [items, ready, addItem, buyNow, removeItem, setQuantity, clearCart]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

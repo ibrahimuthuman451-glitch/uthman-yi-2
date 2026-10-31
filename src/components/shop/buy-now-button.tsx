@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useCart, MAX_PER_ITEM } from "@/components/shop/cart-context";
+import { useCart } from "@/components/shop/cart-context";
 import { buttonClasses } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +30,7 @@ export function BuyNowButton({
   className?: string;
   label?: string;
 }) {
-  const { addItem, clearCart } = useCart();
+  const { buyNow } = useCart();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
@@ -40,8 +40,7 @@ export function BuyNowButton({
       disabled={pending}
       className={buttonClasses("secondary", size, cn("w-full", className))}
       onClick={() => {
-        clearCart();
-        addItem(
+        buyNow(
           {
             productId: product.productId,
             slug: product.slug,
@@ -49,7 +48,7 @@ export function BuyNowButton({
             priceRwf: product.priceRwf,
             imageUrl: product.imageUrl,
           },
-          Math.min(MAX_PER_ITEM, Math.max(1, quantity)),
+          quantity,
         );
         startTransition(() => {
           router.push("/checkout");
