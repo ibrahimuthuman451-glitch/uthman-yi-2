@@ -121,36 +121,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           ) : null}
         </form>
 
-        {/* Categories */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link
-            href={`/shop${buildQuery({ q: search, sort: sortParam === "featured" ? undefined : sortParam })}`}
-            className={cn(
-              "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
-              category === "all"
-                ? "border-brand-600 bg-brand-600 text-white"
-                : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
-            )}
-          >
-            All products
-          </Link>
-          {categories.map((entry) => (
-            <Link
-              key={entry.id}
-              href={`/shop${buildQuery({ q: search, category: entry.slug, sort: sortParam === "featured" ? undefined : sortParam })}`}
-              className={cn(
-                "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
-                category === entry.slug
-                  ? "border-brand-600 bg-brand-600 text-white"
-                  : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
-              )}
-            >
-              {entry.name}
-              <span className="ml-1.5 text-xs opacity-70">{entry._count.products}</span>
-            </Link>
-          ))}
-        </div>
-
         {showDemoNotice ? (
           <p className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
             <strong className="font-semibold">Demonstration catalogue:</strong> listings marked
@@ -190,6 +160,39 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             </div>
           </div>
         )}
+
+        {/* Categories sit below the grid so the products are reachable immediately. */}
+        <p className="mt-10 text-xs font-semibold uppercase tracking-[0.16em] text-navy-400">
+          Browse by category
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link
+            href={`/shop${buildQuery({ q: search, sort: sortParam === "featured" ? undefined : sortParam })}`}
+            className={cn(
+              "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
+              category === "all"
+                ? "border-brand-600 bg-brand-600 text-white"
+                : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
+            )}
+          >
+            All products
+          </Link>
+          {categories.map((entry) => (
+            <Link
+              key={entry.id}
+              href={`/shop${buildQuery({ q: search, category: entry.slug, sort: sortParam === "featured" ? undefined : sortParam })}`}
+              className={cn(
+                "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
+                category === entry.slug
+                  ? "border-brand-600 bg-brand-600 text-white"
+                  : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
+              )}
+            >
+              {entry.name}
+              <span className="ml-1.5 text-xs opacity-70">{entry._count.products}</span>
+            </Link>
+          ))}
+        </div>
 
         {result.pageCount > 1 ? (
           <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
