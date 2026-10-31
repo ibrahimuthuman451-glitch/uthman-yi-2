@@ -46,10 +46,27 @@ export function getEnv(): AppEnv {
   return parsed.data;
 }
 
+/**
+ * Canonical base URL used by metadata, `robots.txt` and the sitemap.
+ *
+ * `VERCEL_URL` is the *per-deployment* hostname and changes on every deploy, so
+ * falling back to it advertised a throwaway preview domain in the sitemap,
+ * canonical tags and `robots.txt` (which made the sitemap unusable in Search
+ * Console for the production property). `VERCEL_PROJECT_PRODUCTION_URL` is the
+ * project's stable production domain, so it is preferred; `VERCEL_URL` stays as
+ * a last resort so preview deployments still resolve to something valid.
+ *
+ * `||` rather than `??` on purpose: an env var set to an empty string should be
+ * treated as missing instead of winning the fallback chain.
+ */
 export function getSiteUrl(): string {
+  const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const deploymentHost = process.env.VERCEL_URL;
+
   const raw =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (productionHost ? `https://${productionHost}` : "") ||
+    (deploymentHost ? `https://${deploymentHost}` : "");
   if (!raw) return "http://localhost:3000";
   return raw.replace(/\/+$/, "");
 }

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSiteSettings } from "@/lib/settings";
 import { listFeaturedProducts, listPublicCategories } from "@/server/services/catalog";
@@ -19,6 +20,18 @@ import { SUPPORTED_BRANDS } from "@/lib/catalogue/brand";
 import { formatPhone, toInternationalPhone } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * The homepage is the only indexable route that did not declare its own
+ * canonical URL, leaving Google to guess the preferred URL for the most
+ * important page. Every other public page already sets `alternates.canonical`;
+ * this is deliberately scoped to the homepage rather than the root layout so
+ * utility routes such as /cart and /checkout never inherit a canonical that
+ * points at the homepage.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   const settings = await getSiteSettings();
