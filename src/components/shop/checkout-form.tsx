@@ -39,12 +39,14 @@ export function CheckoutForm({
   maxQuantityPerItem,
   bankDetails,
   deliveryNotice,
+  stockMode,
 }: {
   areas: DeliveryArea[];
   paymentOptions: PaymentOption[];
   maxQuantityPerItem: number;
   bankDetails: { bankName: string; accountName: string; accountNumber: string } | null;
   deliveryNotice: string;
+  stockMode: "TRACKED" | "ON_REQUEST";
 }) {
   const { items, ready, clearCart } = useCart();
   const [state, formAction, pending] = useActionState(placeOrderAction, initialActionState);
@@ -100,11 +102,14 @@ export function CheckoutForm({
   const selectedOption = paymentOptions.find((option) => option.method === paymentMethod);
 
   const lines = items.map((item) => ({ item, server: serverItems[item.productId] }));
+  // Only TRACKED mode trusts the stock figure; ON_REQUEST confirms availability
+  // by phone, so a stale stock count must not block the order.
+  const enforceStock = stockMode === "TRACKED";
   const blocked = lines.some(
     (line) =>
       !line.server ||
       !line.server.purchasable ||
-      line.item.quantity > (line.server?.stock ?? 0) ||
+      (enforceStock && line.item.quantity > (line.server?.stock ?? 0)) ||
       line.item.quantity < 1 ||
       line.item.quantity > maxQuantityPerItem,
   );

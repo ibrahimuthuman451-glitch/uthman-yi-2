@@ -12,6 +12,7 @@ export function PurchasePanel({
   purchasable,
   stock,
   priceRwf,
+  stockMode,
 }: {
   product: {
     productId: string;
@@ -23,8 +24,12 @@ export function PurchasePanel({
   purchasable: boolean;
   stock: number;
   priceRwf: number | null;
+  stockMode: "TRACKED" | "ON_REQUEST";
 }) {
-  const max = Math.max(1, Math.min(MAX_PER_ITEM, stock));
+  // ON_REQUEST never trusts the stock figure, so the stepper is capped by the
+  // cart policy only. TRACKED caps it at the units actually on hand.
+  const max =
+    stockMode === "TRACKED" ? Math.max(1, Math.min(MAX_PER_ITEM, stock)) : MAX_PER_ITEM;
   const [quantity, setQuantity] = useState(1);
 
   if (!purchasable) {

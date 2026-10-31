@@ -73,6 +73,7 @@ export default async function CheckoutPage() {
                   : null
               }
               deliveryNotice={settings.store.deliveryNotice}
+              stockMode={settings.store.stockMode}
             />
           )}
         </div>

@@ -24,6 +24,7 @@ export default async function CartPage() {
           <CartView
             maxQuantityPerItem={settings.store.maxQuantityPerItem}
             orderNotice={settings.store.orderNotice}
+            stockMode={settings.store.stockMode}
           />
         </div>
       </div>

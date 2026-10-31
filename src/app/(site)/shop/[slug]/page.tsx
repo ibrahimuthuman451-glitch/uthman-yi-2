@@ -156,6 +156,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               purchasable={product.purchasable}
               stock={product.stock}
               priceRwf={product.priceRwf}
+              stockMode={settings.store.stockMode}
             />
           </div>
 

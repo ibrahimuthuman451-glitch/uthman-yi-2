@@ -26,9 +26,11 @@ type ServerItem = {
 export function CartView({
   maxQuantityPerItem,
   orderNotice,
+  stockMode,
 }: {
   maxQuantityPerItem: number;
   orderNotice: string;
+  stockMode: "TRACKED" | "ON_REQUEST";
 }) {
   const { items, ready, removeItem, setQuantity, clearCart } = useCart();
   const [serverItems, setServerItems] = useState<Record<string, ServerItem>>({});
@@ -89,9 +91,17 @@ export function CartView({
     );
   }
 
+  // With ON_REQUEST the shop never trusts the recorded stock figure - every
+  // order is confirmed by phone - so the quantity ceiling comes from the cart
+  // policy alone. Enforcing the stock column in that mode blocked checkout on
+  // products whose count had not been maintained yet.
+  const enforceStock = stockMode === "TRACKED";
   const lines = items.map((item) => ({ item, server: serverItems[item.productId] }));
   const blocked = lines.filter(
-    (line) => !line.server || !line.server.purchasable || line.item.quantity > (line.server?.stock ?? 0),
+    (line) =>
+      !line.server ||
+      !line.server.purchasable ||
+      (enforceStock && line.item.quantity > (line.server?.stock ?? 0)),
   );
   const subtotal = lines.reduce((total, line) => {
     const price = line.server?.priceRwf ?? line.item.priceRwf ?? 0;
@@ -111,7 +121,7 @@ export function CartView({
           {lines.map(({ item, server }) => {
             const price = server?.priceRwf ?? item.priceRwf;
             const unavailable = !server || !server.purchasable;
-            const overStock = server ? item.quantity > server.stock : false;
+            const overStock = enforceStock && server ? item.quantity > server.stock : false;
 
             return (
               <li key={item.productId} className="flex gap-4 p-4 sm:p-5">
@@ -155,7 +165,11 @@ export function CartView({
                     <QuantityStepper
                       value={item.quantity}
                       onChange={(quantity) => setQuantity(item.productId, quantity)}
-                      max={Math.max(1, Math.min(maxQuantityPerItem, server?.stock ?? maxQuantityPerItem))}
+                      max={
+                        enforceStock
+                          ? Math.max(1, Math.min(maxQuantityPerItem, server?.stock ?? maxQuantityPerItem))
+                          : maxQuantityPerItem
+                      }
                     />
                     <button
                       type="button"
