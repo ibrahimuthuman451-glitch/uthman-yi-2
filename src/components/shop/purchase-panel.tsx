@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AddToCartButton } from "@/components/shop/add-to-cart";
+import { BuyNowButton } from "@/components/shop/buy-now-button";
 import { QuantityStepper } from "@/components/shop/quantity-stepper";
 import { formatRwf } from "@/lib/money";
 import { MAX_PER_ITEM } from "@/components/shop/cart-context";
@@ -62,6 +63,7 @@ export function PurchasePanel({
         </div>
       </div>
       <AddToCartButton product={product} quantity={quantity} size="lg" />
+      <BuyNowButton product={product} quantity={quantity} size="lg" />
       <p className="text-xs leading-5 text-muted">
         Stock is confirmed again by our server when you place the order. Delivery fees are shown
         at checkout before you confirm.

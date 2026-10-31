@@ -68,14 +68,14 @@ export default async function HomePage() {
                 Shop products
               </Link>
               <Link
-                href="/software"
+                href="/software-development"
                 className={buttonClasses(
                   "outline",
                   "lg",
                   "border-white/25 bg-transparent text-white hover:bg-white/10",
                 )}
               >
-                Explore our software
+                Our services
               </Link>
             </div>
 
@@ -161,43 +161,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Divisions */}
-      <Section>
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Three divisions, one company"
-            title="Technology commerce, custom software, and our own products."
-            description="Each division has its own team focus and its own pages, so you always know what you are buying or commissioning."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            <DivisionCard
-              icon={<ShopIcon className="h-5 w-5" />}
-              eyebrow="Division A"
-              title="Online technology shop"
-              description="Surveillance, networking, power and intercom equipment, with delivery in Kigali and clear RWF pricing."
-              href="/shop"
-              cta="Browse the catalogue"
-            />
-            <DivisionCard
-              icon={<CodeIcon className="h-5 w-5" />}
-              eyebrow="Division B"
-              title="Software development"
-              description="Websites, e-commerce, custom business systems, mobile apps, automation and technical support."
-              href="/software-development"
-              cta="See our services"
-            />
-            <DivisionCard
-              icon={<SparkIcon className="h-5 w-5" />}
-              eyebrow="Division C"
-              title="Our software"
-              description="MatchVision AI, Digital Discipline and Tender AI: products built and owned by Uthman IY."
-              href="/software"
-              cta="Explore the products"
-            />
-          </div>
-        </div>
-      </Section>
-
       {/* Featured products */}
       <Section tone="surface">
         <div className="container-page">
@@ -251,23 +214,39 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* Our software */}
+      {/* Divisions */}
       <Section>
         <div className="container-page">
           <SectionHeading
-            eyebrow="Our software"
-            title="Products we build, own and support."
-            description="Separate from client work, these are Uthman IY products at different stages of development. Each page states exactly what exists today."
-            action={
-              <Link href="/software" className={buttonClasses("outline", "md")}>
-                All software products
-              </Link>
-            }
+            eyebrow="Three divisions, one company"
+            title="Technology commerce, custom software, and our own products."
+            description="Each division has its own team focus and its own pages, so you always know what you are buying or commissioning."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {software.map((product) => (
-              <SoftwareCard key={product.id} product={product} />
-            ))}
+            <DivisionCard
+              icon={<ShopIcon className="h-5 w-5" />}
+              eyebrow="Division A"
+              title="Online technology shop"
+              description="Surveillance, networking, power and intercom equipment, with delivery in Kigali and clear RWF pricing."
+              href="/shop"
+              cta="Browse the catalogue"
+            />
+            <DivisionCard
+              icon={<CodeIcon className="h-5 w-5" />}
+              eyebrow="Division B"
+              title="Software development"
+              description="Websites, e-commerce, custom business systems, mobile apps, automation and technical support."
+              href="/software-development"
+              cta="See our services"
+            />
+            <DivisionCard
+              icon={<SparkIcon className="h-5 w-5" />}
+              eyebrow="Division C"
+              title="Our software"
+              description="MatchVision AI, Digital Discipline and Tender AI: products built and owned by Uthman IY."
+              href="/software"
+              cta="Explore the products"
+            />
           </div>
         </div>
       </Section>
@@ -291,6 +270,27 @@ export default async function HomePage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {services.slice(0, 8).map((service) => (
               <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Our software */}
+      <Section>
+        <div className="container-page">
+          <SectionHeading
+            eyebrow="Our software"
+            title="Products we build, own and support."
+            description="Separate from client work, these are Uthman IY products at different stages of development. Each page states exactly what exists today."
+            action={
+              <Link href="/software" className={buttonClasses("outline", "md")}>
+                All software products
+              </Link>
+            }
+          />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {software.map((product) => (
+              <SoftwareCard key={product.id} product={product} />
             ))}
           </div>
         </div>

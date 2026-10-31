@@ -12,9 +12,11 @@ export const mainNav = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/software-development", label: "Software Development" },
-  { href: "/software", label: "Our Software" },
   { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
+  // Kept last on purpose: the product line is still in development, so it does
+  // not lead the navigation the way the shop and services do.
+  { href: "/software", label: "Our Software" },
 ] as const;
 
 export const inquiryTypeLabels: Record<InquiryType, string> = {
