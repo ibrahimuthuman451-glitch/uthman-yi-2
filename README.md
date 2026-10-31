@@ -84,7 +84,7 @@ prisma/
   migrations/               SQL migrations
   seed.ts, seed-data.ts     idempotent seed (content + labelled demo listings)
 data/reference/             third-party catalogue research with provenance (not for sale)
-docs/                       go-live checklist, deployment, Supabase, product photos, payments, catalogue format, security, status
+docs/                       go-live checklist, deployment, deployment verification, Supabase, product photos, payments, catalogue format, security, status
 tests/                      Vitest suites
 scripts/                    dev database, smoke test, link checker
 ```
