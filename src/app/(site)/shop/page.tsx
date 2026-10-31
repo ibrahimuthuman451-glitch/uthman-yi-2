@@ -6,7 +6,6 @@ import { ProductCard } from "@/components/shop/product-card";
 import { buttonClasses } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PAGE_SIZE } from "@/lib/constants";
-import { SUPPORTED_BRANDS, brandByKey } from "@/lib/catalogue/brand";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +19,6 @@ export const metadata: Metadata = {
 type SearchParams = Promise<{
   q?: string;
   category?: string;
-  brand?: string;
   sort?: string;
   page?: string;
 }>;
@@ -47,7 +45,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
   const settings = await getSiteSettings();
   const search = params.q?.slice(0, 80) ?? "";
   const category = params.category ?? "all";
-  const brand = brandByKey(params.brand);
   const sortParam = SORT_OPTIONS.some((option) => option.value === params.sort)
     ? (params.sort as (typeof SORT_OPTIONS)[number]["value"])
     : "featured";
@@ -57,7 +54,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
     listCatalogueProducts({
       search,
       category,
-      brand: brand?.key,
       sort: sortParam === "featured" ? "newest" : sortParam,
       page,
       pageSize: PAGE_SIZE,
@@ -118,47 +114,17 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           <button type="submit" className={buttonClasses("primary", "md", "h-[42px]")}>
             Apply
           </button>
-          {search || category !== "all" || brand ? (
+          {search || category !== "all" ? (
             <Link href="/shop" className={buttonClasses("ghost", "md", "h-[42px]")}>
               Clear
             </Link>
           ) : null}
         </form>
 
-        {/* Brands */}
-        <div className="mt-5 flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-xs font-semibold uppercase tracking-wide text-navy-400">Brand</span>
-          <Link
-            href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam })}`}
-            className={cn(
-              "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
-              !brand
-                ? "border-navy-900 bg-navy-900 text-white"
-                : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
-            )}
-          >
-            All brands
-          </Link>
-          {SUPPORTED_BRANDS.map((entry) => (
-            <Link
-              key={entry.key}
-              href={`/shop${buildQuery({ q: search, category, brand: entry.key, sort: sortParam === "featured" ? undefined : sortParam })}`}
-              className={cn(
-                "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
-                brand?.key === entry.key
-                  ? "border-navy-900 bg-navy-900 text-white"
-                  : "border-navy-200 bg-white text-navy-700 hover:border-brand-300",
-              )}
-            >
-              {entry.label}
-            </Link>
-          ))}
-        </div>
-
         {/* Categories */}
         <div className="mt-4 flex flex-wrap gap-2">
           <Link
-            href={`/shop${buildQuery({ q: search, brand: brand?.key, sort: sortParam === "featured" ? undefined : sortParam })}`}
+            href={`/shop${buildQuery({ q: search, sort: sortParam === "featured" ? undefined : sortParam })}`}
             className={cn(
               "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
               category === "all"
@@ -171,7 +137,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           {categories.map((entry) => (
             <Link
               key={entry.id}
-              href={`/shop${buildQuery({ q: search, category: entry.slug, brand: brand?.key, sort: sortParam === "featured" ? undefined : sortParam })}`}
+              href={`/shop${buildQuery({ q: search, category: entry.slug, sort: sortParam === "featured" ? undefined : sortParam })}`}
               className={cn(
                 "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
                 category === entry.slug
@@ -197,7 +163,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           <p className="text-sm text-muted" aria-live="polite">
             {result.total} {result.total === 1 ? "product" : "products"}
             {activeCategory ? ` in ${activeCategory.name}` : ""}
-            {brand ? ` from ${brand.label}` : ""}
             {search ? ` matching “${search}”` : ""}
           </p>
         </div>
@@ -230,7 +195,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
             {result.page > 1 ? (
               <Link
-                href={`/shop${buildQuery({ q: search, category, brand: brand?.key, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page - 1) })}`}
+                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page - 1) })}`}
                 className={buttonClasses("outline", "sm")}
               >
                 Previous
@@ -241,7 +206,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             </span>
             {result.page < result.pageCount ? (
               <Link
-                href={`/shop${buildQuery({ q: search, category, brand: brand?.key, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page + 1) })}`}
+                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page + 1) })}`}
                 className={buttonClasses("outline", "sm")}
               >
                 Next
