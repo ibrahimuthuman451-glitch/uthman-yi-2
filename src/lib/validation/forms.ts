@@ -144,7 +144,9 @@ export const paymentMethodSchema = z.enum([
 
 export const checkoutFormSchema = z.object({
   customerName: requiredString("Full name", 2, 120),
-  customerEmail: emailSchema,
+  // Optional on purpose: many customers order by phone only, and requiring an
+  // address they do not have was blocking completed orders.
+  customerEmail: optionalEmailSchema,
   customerPhone: phoneSchema,
   deliveryAreaId: z.string().trim().min(1, "Select a delivery area"),
   deliveryAddress: requiredString("Delivery address", 10, 400),

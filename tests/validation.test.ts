@@ -55,6 +55,12 @@ describe("checkout validation", () => {
     expect(result.success).toBe(false);
   });
 
+  it("accepts a checkout with no email address, because ordering by phone is normal here", () => {
+    const result = checkoutFormSchema.safeParse({ ...validCheckout, customerEmail: "" });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.customerEmail).toBe("");
+  });
+
   it("rejects honeypot submissions", () => {
     const result = checkoutFormSchema.safeParse({ ...validCheckout, website: "http://spam" });
     expect(result.success).toBe(false);

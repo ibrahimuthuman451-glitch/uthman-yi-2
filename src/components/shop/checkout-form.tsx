@@ -180,8 +180,8 @@ export function CheckoutForm({
             <Field label="Phone number" htmlFor="customerPhone" required error={state.fieldErrors?.customerPhone} hint="Used to confirm delivery. Format: 07XX XXX XXX">
               <Input id="customerPhone" name="customerPhone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="0780 551 125" />
             </Field>
-            <Field label="Email address" htmlFor="customerEmail" required error={state.fieldErrors?.customerEmail} className="sm:col-span-2">
-              <Input id="customerEmail" name="customerEmail" type="email" autoComplete="email" required maxLength={254} />
+            <Field label="Email address" htmlFor="customerEmail" error={state.fieldErrors?.customerEmail} hint="Optional. Used for receipts and for tracking your order later." className="sm:col-span-2">
+              <Input id="customerEmail" name="customerEmail" type="email" autoComplete="email" maxLength={254} />
             </Field>
           </div>
         </section>
