@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ProductMedia } from "@/components/shop/product-media";
 import { AddToCartButton } from "@/components/shop/add-to-cart";
+import { BuyNowButton } from "@/components/shop/buy-now-button";
 import { formatRwf } from "@/lib/money";
 import type { PublicProductCard as ProductCardData } from "@/server/services/catalog";
 
@@ -65,18 +66,30 @@ export function ProductCard({ product }: { product: ProductCardData }) {
             {product.availabilityLabel}
           </p>
 
-          <div className="mt-3">
+          <div className="mt-3 grid gap-2">
             {product.purchasable ? (
-              <AddToCartButton
-                size="sm"
-                product={{
-                  productId: product.id,
-                  slug: product.slug,
-                  name: product.name,
-                  priceRwf: product.priceRwf,
-                  imageUrl: product.imageUrl,
-                }}
-              />
+              <>
+                <AddToCartButton
+                  size="sm"
+                  product={{
+                    productId: product.id,
+                    slug: product.slug,
+                    name: product.name,
+                    priceRwf: product.priceRwf,
+                    imageUrl: product.imageUrl,
+                  }}
+                />
+                <BuyNowButton
+                  size="sm"
+                  product={{
+                    productId: product.id,
+                    slug: product.slug,
+                    name: product.name,
+                    priceRwf: product.priceRwf,
+                    imageUrl: product.imageUrl,
+                  }}
+                />
+              </>
             ) : (
               <Link
                 href={`/contact?type=PRODUCT_ENQUIRY&product=${product.slug}`}
