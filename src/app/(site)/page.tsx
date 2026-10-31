@@ -16,7 +16,6 @@ import {
   softwareStatusTone,
 } from "@/components/site/cards";
 import { softwareStatusLabels } from "@/lib/constants";
-import { SUPPORTED_BRANDS } from "@/lib/catalogue/brand";
 import { formatPhone, toInternationalPhone } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -198,32 +197,6 @@ export default async function HomePage() {
           </div>
         </div>
       </Section>
-
-      {/* Brands we stock - text only, no third-party logo files are used. */}
-      <div className="border-y border-navy-100 bg-white">
-        <div className="container-page flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-navy-400">
-            Brands we stock
-          </p>
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-            {SUPPORTED_BRANDS.map((brand) => (
-              <Link
-                key={brand.key}
-                href={`/shop?brand=${brand.key}`}
-                className="group flex flex-col"
-              >
-                <span className="font-display text-lg font-extrabold tracking-tight text-navy-800 group-hover:text-brand-700">
-                  {brand.label}
-                </span>
-                <span className="text-[11px] text-navy-400">{brand.blurb}</span>
-              </Link>
-            ))}
-            <Link href="/shop" className="text-sm font-semibold text-brand-700 hover:text-brand-800">
-              Shop all {"→"}
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* Featured products */}
       <Section tone="surface">
