@@ -66,7 +66,12 @@ describe("payment capability gating", () => {
       ...defaultSettings,
       payments: {
         ...defaultSettings.payments,
-        manualMobileMoney: { enabled: true, mtnNumber: "", instructions: "" },
+        manualMobileMoney: {
+          enabled: true,
+          mtnNumber: "",
+          ussdTemplate: "*182*1*1*{msisdn}*{amount}#",
+          instructions: "",
+        },
       },
     };
     const option = buildPaymentOptions(settings, envWithoutMomo).find(

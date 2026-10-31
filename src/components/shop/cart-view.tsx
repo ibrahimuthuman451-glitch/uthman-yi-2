@@ -9,6 +9,8 @@ import { Alert } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { buttonClasses } from "@/components/ui/button";
 import { formatRwf } from "@/lib/money";
+import { UssdPayButton } from "@/components/shop/ussd-pay-button";
+import { buildMomoTransferPrompt } from "@/lib/payments/ussd";
 
 type ServerItem = {
   productId: string;
@@ -27,10 +29,15 @@ export function CartView({
   maxQuantityPerItem,
   orderNotice,
   stockMode,
+  momoNumber,
+  momoUssdTemplate,
 }: {
   maxQuantityPerItem: number;
   orderNotice: string;
   stockMode: "TRACKED" | "ON_REQUEST";
+  /** MTN MoMo receiving number used for the one-tap USSD payment button. */
+  momoNumber: string;
+  momoUssdTemplate?: string;
 }) {
   const { items, ready, removeItem, setQuantity, clearCart } = useCart();
   const [serverItems, setServerItems] = useState<Record<string, ServerItem>>({});
@@ -107,6 +114,18 @@ export function CartView({
     const price = line.server?.priceRwf ?? line.item.priceRwf ?? 0;
     return total + price * line.item.quantity;
   }, 0);
+
+  // One-tap MoMo payment: the USSD string carries the full total, so the
+  // customer only presses call and enters their PIN. Only offered once the cart
+  // itself is valid, so nobody pays for a cart that cannot be ordered.
+  const momoPrompt =
+    blocked.length === 0 && subtotal > 0
+      ? buildMomoTransferPrompt({
+          msisdn: momoNumber,
+          amountRwf: subtotal,
+          template: momoUssdTemplate,
+        })
+      : null;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr] lg:items-start">
@@ -224,11 +243,15 @@ export function CartView({
           </Alert>
         ) : null}
 
+        {momoPrompt ? (
+          <UssdPayButton prompt={momoPrompt} className="mt-4" label="Pay now with MoMo" />
+        ) : null}
+
         <Link
           href={blocked.length > 0 ? "/cart" : "/checkout"}
           aria-disabled={blocked.length > 0}
           className={buttonClasses(
-            "primary",
+            momoPrompt ? "outline" : "primary",
             "lg",
             blocked.length > 0 ? "mt-4 w-full pointer-events-none opacity-60" : "mt-4 w-full",
           )}

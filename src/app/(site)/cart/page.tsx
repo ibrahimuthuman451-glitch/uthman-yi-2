@@ -25,6 +25,8 @@ export default async function CartPage() {
             maxQuantityPerItem={settings.store.maxQuantityPerItem}
             orderNotice={settings.store.orderNotice}
             stockMode={settings.store.stockMode}
+            momoNumber={settings.payments.manualMobileMoney.mtnNumber}
+            momoUssdTemplate={settings.payments.manualMobileMoney.ussdTemplate}
           />
         </div>
       </div>

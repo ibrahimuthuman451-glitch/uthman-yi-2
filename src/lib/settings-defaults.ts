@@ -43,6 +43,12 @@ export type SiteSettings = {
     manualMobileMoney: {
       enabled: boolean;
       mtnNumber: string;
+      /**
+       * USSD path used by the one-tap "Pay with MoMo" button. `{msisdn}` and
+       * `{amount}` are substituted at render time; the customer's PIN is never
+       * part of it.
+       */
+      ussdTemplate: string;
       instructions: string;
     };
     /**
@@ -130,6 +136,10 @@ export const defaultSettings: SiteSettings = {
     manualMobileMoney: {
       enabled: true,
       mtnNumber: "0780551125",
+      // USSD path behind the one-tap "Pay with MoMo" button. This is MTN
+      // Rwanda's "send money to an MTN number" path; {msisdn} and {amount} are
+      // substituted at render time, and the customer still enters their PIN.
+      ussdTemplate: "*182*1*1*{msisdn}*{amount}#",
       instructions:
         "Send the products total by MTN MoMo to 0780551125, then submit the transaction reference from your SMS. Our team verifies the payment before dispatch.",
     },

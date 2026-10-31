@@ -13,6 +13,8 @@ import {
   paymentStatusLabels,
 } from "@/lib/constants";
 import { acceptsPaymentReference, paymentInstructions } from "@/lib/payments/instructions";
+import { buildMomoTransferPrompt } from "@/lib/payments/ussd";
+import { UssdPayButton } from "@/components/shop/ussd-pay-button";
 import { Badge } from "@/components/ui/badge";
 import { Alert } from "@/components/ui/alert";
 import { buttonClasses } from "@/components/ui/button";
@@ -60,6 +62,23 @@ export default async function OrderPage({
   const showReferenceForm = needsPayment && acceptsPaymentReference(order.paymentMethod);
   const deliveryFeePending = order.deliveryFeeStatus === "PENDING_AGREEMENT";
   const deliveryIsFree = order.deliveryFeeStatus === "FREE";
+
+  /**
+   * One-tap MoMo payment for the order total. Deliberately withheld while the
+   * delivery fee is still "pending agreement" - the amount could change, and a
+   * pre-filled USSD string cannot be corrected once the customer has dialled it.
+   */
+  const momoPrompt =
+    needsPayment &&
+    !deliveryFeePending &&
+    order.paymentMethod === "MANUAL_MOBILE_MONEY" &&
+    settings.payments.manualMobileMoney.enabled
+      ? buildMomoTransferPrompt({
+          msisdn: settings.payments.manualMobileMoney.mtnNumber,
+          amountRwf: order.totalRwf,
+          template: settings.payments.manualMobileMoney.ussdTemplate,
+        })
+      : null;
 
   return (
     <div className="bg-surface">
@@ -230,9 +249,14 @@ export default async function OrderPage({
               ) : null}
 
               {needsPayment ? (
-                <div className="mt-4 rounded-xl bg-surface p-4 text-xs leading-5 text-navy-700">
-                  {paymentInstructions(order.paymentMethod, settings)}
-                </div>
+                <>
+                  {momoPrompt ? (
+                    <UssdPayButton prompt={momoPrompt} className="mt-4" />
+                  ) : null}
+                  <div className="mt-4 rounded-xl bg-surface p-4 text-xs leading-5 text-navy-700">
+                    {paymentInstructions(order.paymentMethod, settings)}
+                  </div>
+                </>
               ) : null}
 
               {showReferenceForm ? <PaymentReferenceForm orderNumber={order.orderNumber} /> : null}
