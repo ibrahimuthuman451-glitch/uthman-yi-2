@@ -99,6 +99,18 @@ export default async function AboutPage() {
             title="Three divisions, clearly separated"
             description="Each division has its own pages, pricing approach and team focus, so clients and customers always know who they are dealing with."
           />
+          {company.servicesOffered.length > 0 ? (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {company.servicesOffered.map((service) => (
+                <span
+                  key={service}
+                  className="rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-sm font-medium text-navy-700"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
+          ) : null}
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             <DivisionCard
               icon={<ShopIcon className="h-5 w-5" />}

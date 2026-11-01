@@ -27,7 +27,8 @@
     "photos:map": "tsx --tsconfig tsconfig.scripts.json scripts/map-drive-photos.ts",
     "photos:urls": "tsx --tsconfig tsconfig.scripts.json scripts/apply-photo-urls.ts",
     "delivery:free": "tsx --tsconfig tsconfig.scripts.json scripts/apply-free-delivery.ts",
-    "stock:set": "tsx --tsconfig tsconfig.scripts.json scripts/set-product-stock.ts"
+    "stock:set": "tsx --tsconfig tsconfig.scripts.json scripts/set-product-stock.ts",
+    "business:apply": "tsx --tsconfig tsconfig.scripts.json scripts/apply-business-details.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
