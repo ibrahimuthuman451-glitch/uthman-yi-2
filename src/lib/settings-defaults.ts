@@ -29,6 +29,8 @@ export type SiteSettings = {
       opens: string;
       closes: string;
     };
+    /** Services advertised on the site and on the Google Business Profile. */
+    servicesOffered: string[];
   };
   store: {
     currency: "RWF";
@@ -112,7 +114,7 @@ export const defaultSettings: SiteSettings = {
     phone: "0780551125",
     // Confirmed by the owner on 2026-10-26 (+250 785 779 207).
     secondaryPhone: "0785779207",
-    email: "uthumanyi@gmail.com",
+    email: "ibrahimuthuman451@gmail.com",
     // Street address confirmed by the owner on 2026-11-01.
     addressLine: "KG 14 Ave, Gisozi",
     region: "Gasabo District",
@@ -120,12 +122,14 @@ export const defaultSettings: SiteSettings = {
     country: "Rwanda",
     // WhatsApp uses the second business line, confirmed by the owner on 2026-10-26.
     whatsappPhone: "0785779207",
-    // Owner: open every day from 08:00. Closing time to be confirmed.
+    // Owner: open every day, 08:00 to 21:00.
     openingHours: {
       days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       opens: "08:00",
-      closes: "18:00",
+      closes: "21:00",
     },
+    // Must match the services listed on the Google Business Profile.
+    servicesOffered: ["CCTV camera installation", "Starlink installation", "Electronics shop"],
   },
   store: {
     currency: "RWF",

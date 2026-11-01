@@ -53,6 +53,19 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     currenciesAccepted: "RWF",
     priceRange: "RWF",
     ...(acceptedPayments.length > 0 ? { paymentAccepted: acceptedPayments.join(", ") } : {}),
+    ...(settings.company.servicesOffered.length > 0
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Services",
+            itemListElement: settings.company.servicesOffered.map((service, index) => ({
+              "@type": "Offer",
+              position: index + 1,
+              itemOffered: { "@type": "Service", name: service },
+            })),
+          },
+        }
+      : {}),
   };
 
   return (
