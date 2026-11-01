@@ -15,9 +15,20 @@ export type SiteSettings = {
     secondaryPhone: string;
     email: string;
     addressLine: string;
+    /** District/region used for structured data and the business profile. */
+    region: string;
     city: string;
     country: string;
     whatsappPhone: string;
+    /**
+     * Opening hours published on the site and in LocalBusiness structured data.
+     * Kept as data so it can never drift from the Google Business Profile.
+     */
+    openingHours: {
+      days: string[];
+      opens: string;
+      closes: string;
+    };
   };
   store: {
     currency: "RWF";
@@ -102,11 +113,19 @@ export const defaultSettings: SiteSettings = {
     // Confirmed by the owner on 2026-10-26 (+250 785 779 207).
     secondaryPhone: "0785779207",
     email: "uthumanyi@gmail.com",
-    addressLine: "Gisozi",
+    // Street address confirmed by the owner on 2026-11-01.
+    addressLine: "KG 14 Ave, Gisozi",
+    region: "Gasabo District",
     city: "Kigali",
     country: "Rwanda",
     // WhatsApp uses the second business line, confirmed by the owner on 2026-10-26.
     whatsappPhone: "0785779207",
+    // Owner: open every day from 08:00. Closing time to be confirmed.
+    openingHours: {
+      days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
   },
   store: {
     currency: "RWF",

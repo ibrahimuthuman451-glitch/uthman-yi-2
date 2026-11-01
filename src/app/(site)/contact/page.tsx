@@ -46,9 +46,14 @@ export default async function ContactPage({
   const settings = await getSiteSettings();
   const selectedType = (CONTACT_TYPES.includes(type as InquiryType) ? type : "PRODUCT_ENQUIRY") as InquiryType;
   const whatsapp = toInternationalPhone(settings.company.whatsappPhone || settings.company.phone);
-  const location = [settings.company.addressLine, settings.company.city, settings.company.country]
+  const location = [settings.company.addressLine, settings.company.region, settings.company.city, settings.company.country]
     .filter(Boolean)
     .join(", ");
+  const hours = settings.company.openingHours;
+  const hoursLabel =
+    hours.days.length === 7
+      ? `Every day ${hours.opens}–${hours.closes}`
+      : `${hours.days.join(", ")} ${hours.opens}–${hours.closes}`;
 
   const subject = product
     ? `Product enquiry: ${product.replace(/-/g, " ")}`
@@ -90,6 +95,7 @@ export default async function ContactPage({
                     </a>
                   </p>
                 ) : null}
+                <p className="pt-1 text-muted">Open {hoursLabel}</p>
               </address>
 
               <div className="mt-4 grid gap-2">
