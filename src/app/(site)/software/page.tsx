@@ -21,7 +21,7 @@ export default async function SoftwareOverviewPage() {
 
   return (
     <>
-      <section className="hero-grid bg-navy-950 py-16 text-white sm:py-20">
+      <section className="hero-grid bg-navy-950 py-10 text-white sm:py-12">
         <div className="container-page">
           <p className="eyebrow text-brand-300">Division C</p>
           <h1 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">

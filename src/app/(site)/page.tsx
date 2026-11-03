@@ -49,21 +49,21 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="hero-grid relative overflow-hidden bg-navy-950 text-white">
-        <div className="container-page relative grid gap-8 py-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-16">
+        <div className="container-page relative grid gap-6 py-8 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-14">
           <div className="max-w-2xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-brand-100">
+            <p className="hidden items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-brand-100 sm:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-400" aria-hidden="true" />
               {settings.content.heroEyebrow}
             </p>
-            <h1 className="mt-4 text-4xl font-extrabold leading-[1.08] text-white sm:text-5xl lg:text-[3.6rem]">
+            <h1 className="text-3xl font-extrabold leading-[1.08] text-white sm:mt-4 sm:text-5xl lg:text-[3.4rem]">
               {settings.content.heroHeadline}{" "}
               <span className="text-brand-300">{settings.content.heroHighlight}</span>
             </h1>
-            <p className="mt-4 max-w-xl text-base leading-7 text-navy-200 sm:text-lg">
+            <p className="mt-3 max-w-xl text-sm leading-6 text-navy-200 sm:mt-4 sm:text-lg sm:leading-7">
               {settings.content.heroSubheadline}
             </p>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-5 flex flex-col gap-3 sm:mt-6 sm:flex-row">
               <Link href="/shop" className={buttonClasses("primary", "lg")}>
                 Shop products
               </Link>
@@ -79,7 +79,7 @@ export default async function HomePage() {
               </Link>
             </div>
 
-            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-white/10 pt-5 sm:grid-cols-3">
+            <dl className="mt-6 hidden gap-6 border-t border-white/10 pt-5 sm:grid sm:grid-cols-3">
               <div>
                 <dt className="text-xs uppercase tracking-wide text-navy-400">Location</dt>
                 <dd className="mt-1 text-sm font-medium text-white">

@@ -21,7 +21,7 @@ export default async function SoftwareDevelopmentPage() {
 
   return (
     <>
-      <section className="hero-grid bg-navy-950 py-16 text-white sm:py-20">
+      <section className="hero-grid bg-navy-950 py-10 text-white sm:py-12">
         <div className="container-page grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
           <div>
             <p className="eyebrow text-brand-300">Division B</p>
