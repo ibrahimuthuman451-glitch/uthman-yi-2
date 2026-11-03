@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const [products, services, software] = await Promise.all([
+    const [products, services, software, categories] = await Promise.all([
       db.product.findMany({
         where: { isPublished: true, archivedAt: null, dataStatus: { in: ["APPROVED", "DEMO"] } },
         select: { slug: true, updatedAt: true },
@@ -33,6 +33,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       db.softwareProduct.findMany({
         where: { isPublished: true },
         select: { slug: true, updatedAt: true },
+      }),
+      db.category.findMany({
+        where: { isActive: true },
+        select: { slug: true, _count: { select: { products: { where: { archivedAt: null, isPublished: true } } } } },
       }),
     ]);
 
@@ -56,6 +60,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly" as const,
         priority: 0.8,
       })),
+      // Category landing pages - the URLs that can rank for "CCTV cameras Kigali".
+      ...categories
+        .filter((category) => category._count.products > 0)
+        .map((category) => ({
+          url: `${base}/shop/category/${category.slug}`,
+          lastModified: now,
+          changeFrequency: "weekly" as const,
+          priority: 0.8,
+        })),
     ];
   } catch (error) {
     console.error("[sitemap] database unavailable, serving static routes", error);

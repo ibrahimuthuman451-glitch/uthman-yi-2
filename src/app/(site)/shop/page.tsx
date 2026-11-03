@@ -180,7 +180,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           {categories.map((entry) => (
             <Link
               key={entry.id}
-              href={`/shop${buildQuery({ q: search, category: entry.slug, sort: sortParam === "featured" ? undefined : sortParam })}`}
+              href={`/shop/category/${entry.slug}`}
               className={cn(
                 "rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
                 category === entry.slug
