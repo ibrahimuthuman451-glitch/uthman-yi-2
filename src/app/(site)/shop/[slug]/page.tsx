@@ -11,6 +11,7 @@ import { buttonClasses } from "@/components/ui/button";
 import { formatRwf } from "@/lib/money";
 import { getSiteUrl } from "@/lib/env";
 import { formatDate } from "@/lib/utils";
+import { buildProductDescription, isLegacyDescription } from "@/lib/catalogue/description";
 
 export const dynamic = "force-dynamic";
 
@@ -48,11 +49,17 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   const related = await listRelatedProducts(product.categoryId, product.id);
 
+  // Listings imported with the old shared template get unique, factual copy
+  // generated from the model name, so the page is not thin duplicate content.
+  const productDescription = isLegacyDescription(product.description)
+    ? buildProductDescription(product.name, product.slug.length)
+    : product.description;
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.shortDescription || product.description.slice(0, 300),
+    description: productDescription.slice(0, 300),
     sku: product.sku ?? undefined,
     ...(product.imageUrl ? { image: [product.imageUrl] } : {}),
     brand: { "@type": "Brand", name: product.brand?.label ?? "Uthman IY" },
@@ -200,14 +207,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
           <h2 id="product-description" className="text-lg font-semibold text-navy-900">
             Product details
           </h2>
-          {product.description ? (
-            <div className="prose-uy mt-3 whitespace-pre-line">{product.description}</div>
-          ) : (
-            <p className="mt-3 text-sm text-muted">
-              A detailed description has not been published for this listing yet. Contact us for
-              full product information.
-            </p>
-          )}
+          <div className="prose-uy mt-3 whitespace-pre-line">{productDescription}</div>
         </section>
 
         <section aria-labelledby="product-specifications">

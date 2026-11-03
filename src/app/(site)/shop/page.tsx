@@ -6,13 +6,14 @@ import { ProductCard } from "@/components/shop/product-card";
 import { buttonClasses } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PAGE_SIZE } from "@/lib/constants";
+import { shopFaqs } from "@/lib/faqs";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Technology shop",
+  title: "CCTV, Starlink & Electronics Shop in Kigali",
   description:
-    "Shop technology products from Uthman IY in Kigali: CCTV cameras and kits, recorders, Starlink kits and accessories, power backups, alarms and intercoms.",
+    "Buy CCTV cameras, NVR and DVR recorders, complete kits, Starlink kits and accessories, power backups, alarms and intercoms in Kigali. Clear prices in RWF, free delivery across Rwanda, installation by our own technicians.",
   alternates: { canonical: "/shop" },
 };
 
@@ -217,6 +218,35 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             ) : null}
           </nav>
         ) : null}
+
+        <section aria-labelledby="shop-faq" className="mt-12 rounded-2xl border border-navy-100 bg-white p-6">
+          <h2 id="shop-faq" className="text-lg font-semibold text-navy-900">
+            Frequently asked questions
+          </h2>
+          <dl className="mt-4 space-y-5">
+            {shopFaqs.map((faq) => (
+              <div key={faq.question}>
+                <dt className="text-sm font-semibold text-navy-900">{faq.question}</dt>
+                <dd className="mt-1 text-sm leading-6 text-navy-700">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: shopFaqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: { "@type": "Answer", text: faq.answer },
+              })),
+            }),
+          }}
+        />
       </div>
     </div>
   );
