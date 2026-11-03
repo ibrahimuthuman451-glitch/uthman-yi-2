@@ -79,7 +79,7 @@ export default async function CategoryPage({
   return (
     <div className="bg-surface">
       <div className="border-b border-navy-100 bg-white">
-        <div className="container-page py-8 sm:py-10">
+        <div className="container-page py-5 sm:py-8">
           <nav aria-label="Breadcrumb" className="text-xs text-muted">
             <Link href="/" className="hover:text-brand-700">
               Home
@@ -90,17 +90,17 @@ export default async function CategoryPage({
             </Link>{" "}
             <span aria-hidden="true">/</span> <span className="text-navy-700">{category.name}</span>
           </nav>
-          <h1 className="mt-3 text-3xl font-bold text-navy-900 sm:text-4xl">
+          <h1 className="mt-2 text-2xl font-bold text-navy-900 sm:text-4xl">
             {category.name} in Kigali
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
+          <p className="mt-2 max-w-2xl text-xs leading-5 text-muted sm:text-sm sm:leading-6">
             {category.description?.trim() ||
               `Uthman IY supplies ${category.name.toLowerCase()} from our shop on KG 14 Ave, Gisozi. Prices are in Rwandan francs, delivery is free across Rwanda, and our team can install and configure what you buy.`}
           </p>
         </div>
       </div>
 
-      <div className="container-page py-8 sm:py-10">
+      <div className="container-page py-5 sm:py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted" aria-live="polite">
             {result.total} {result.total === 1 ? "product" : "products"} in {category.name}

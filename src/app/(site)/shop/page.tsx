@@ -68,26 +68,26 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
   return (
     <div className="bg-surface">
       <div className="border-b border-navy-100 bg-white">
-        <div className="container-page py-10 sm:py-12">
+        <div className="container-page py-5 sm:py-10">
           <nav aria-label="Breadcrumb" className="text-xs text-muted">
             <Link href="/" className="hover:text-brand-700">
               Home
             </Link>{" "}
             <span aria-hidden="true">/</span> <span className="text-navy-700">Shop</span>
           </nav>
-          <h1 className="mt-3 text-3xl font-bold text-navy-900 sm:text-4xl">Technology shop</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
+          <h1 className="mt-2 text-2xl font-bold text-navy-900 sm:text-4xl">Technology shop</h1>
+          <p className="mt-2 hidden max-w-2xl text-sm leading-6 text-muted sm:block">
             {settings.store.catalogueNotice}
           </p>
         </div>
       </div>
 
-      <div className="container-page py-8 sm:py-10">
-        {/* Search and sort */}
-        <form method="get" className="flex flex-col gap-3 sm:flex-row sm:items-end">
+      <div className="container-page py-5 sm:py-10">
+        {/* Search and sort - labels hidden on phones so products stay high on the page */}
+        <form method="get" className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
           {category !== "all" ? <input type="hidden" name="category" value={category} /> : null}
           <div className="flex-1">
-            <label htmlFor="shop-search" className="field-label">
+            <label htmlFor="shop-search" className="field-label hidden sm:block">
               Search the catalogue
             </label>
             <input
@@ -95,26 +95,28 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
               name="q"
               type="search"
               defaultValue={search}
-              placeholder="Search by product name or SKU"
+              placeholder="Search products or SKU"
               className="field-input"
               maxLength={80}
             />
           </div>
-          <div className="sm:w-56">
-            <label htmlFor="shop-sort" className="field-label">
-              Sort by
-            </label>
-            <select id="shop-sort" name="sort" defaultValue={sortParam} className="field-input">
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          <div className="flex gap-2 sm:contents">
+            <div className="flex-1 sm:w-56 sm:flex-none">
+              <label htmlFor="shop-sort" className="field-label hidden sm:block">
+                Sort by
+              </label>
+              <select id="shop-sort" name="sort" defaultValue={sortParam} className="field-input">
+                {SORT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button type="submit" className={buttonClasses("primary", "md", "h-[42px]")}>
+              Apply
+            </button>
           </div>
-          <button type="submit" className={buttonClasses("primary", "md", "h-[42px]")}>
-            Apply
-          </button>
           {search || category !== "all" ? (
             <Link href="/shop" className={buttonClasses("ghost", "md", "h-[42px]")}>
               Clear
@@ -123,14 +125,14 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         </form>
 
         {showDemoNotice ? (
-          <p className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
             <strong className="font-semibold">Demonstration catalogue:</strong> listings marked
             &ldquo;Demo listing&rdquo; are sample data used to preview the shop. They are not real
             stock or approved Uthman IY prices.
           </p>
         ) : null}
 
-        <div className="mt-6 flex flex-wrap items-baseline justify-between gap-2">
+        <div className="mt-4 flex flex-wrap items-baseline justify-between gap-2">
           <p className="text-sm text-muted" aria-live="polite">
             {result.total} {result.total === 1 ? "product" : "products"}
             {activeCategory ? ` in ${activeCategory.name}` : ""}
@@ -139,7 +141,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         </div>
 
         {result.products.length > 0 ? (
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {result.products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
