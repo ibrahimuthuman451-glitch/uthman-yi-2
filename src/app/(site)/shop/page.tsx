@@ -83,6 +83,55 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
       </div>
 
       <div className="container-page py-5 sm:py-10">
+        {result.products.length > 0 ? (
+          <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {result.products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 rounded-2xl border border-dashed border-navy-200 bg-white p-10 text-center">
+            <p className="text-base font-semibold text-navy-900">No products match this search</p>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
+              Try a different search term or category. If you need something specific, send us an
+              enquiry and we will confirm availability and pricing.
+            </p>
+            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/shop" className={buttonClasses("outline", "md")}>
+                Clear filters
+              </Link>
+              <Link href="/contact?type=PRODUCT_ENQUIRY" className={buttonClasses("primary", "md")}>
+                Ask about a product
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {result.pageCount > 1 ? (
+          <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
+            {result.page > 1 ? (
+              <Link
+                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page - 1) })}`}
+                className={buttonClasses("outline", "sm")}
+              >
+                Previous
+              </Link>
+            ) : null}
+            <span className="px-3 text-sm text-muted">
+              Page {result.page} of {result.pageCount}
+            </span>
+            {result.page < result.pageCount ? (
+              <Link
+                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page + 1) })}`}
+                className={buttonClasses("outline", "sm")}
+              >
+                Next
+              </Link>
+            ) : null}
+          </nav>
+        ) : null}
+
+        <h2 className="mt-12 text-base font-semibold text-navy-900">Refine results</h2>
         {/* Search and sort - labels hidden on phones so products stay high on the page */}
         <form method="get" className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
           {category !== "all" ? <input type="hidden" name="category" value={category} /> : null}
@@ -140,30 +189,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
           </p>
         </div>
 
-        {result.products.length > 0 ? (
-          <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {result.products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="mt-8 rounded-2xl border border-dashed border-navy-200 bg-white p-10 text-center">
-            <p className="text-base font-semibold text-navy-900">No products match this search</p>
-            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
-              Try a different search term or category. If you need something specific, send us an
-              enquiry and we will confirm availability and pricing.
-            </p>
-            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/shop" className={buttonClasses("outline", "md")}>
-                Clear filters
-              </Link>
-              <Link href="/contact?type=PRODUCT_ENQUIRY" className={buttonClasses("primary", "md")}>
-                Ask about a product
-              </Link>
-            </div>
-          </div>
-        )}
-
         {/* Categories sit below the grid so the products are reachable immediately. */}
         <p className="mt-10 text-xs font-semibold uppercase tracking-[0.16em] text-navy-400">
           Browse by category
@@ -196,30 +221,6 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             </Link>
           ))}
         </div>
-
-        {result.pageCount > 1 ? (
-          <nav aria-label="Pagination" className="mt-10 flex items-center justify-center gap-2">
-            {result.page > 1 ? (
-              <Link
-                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page - 1) })}`}
-                className={buttonClasses("outline", "sm")}
-              >
-                Previous
-              </Link>
-            ) : null}
-            <span className="px-3 text-sm text-muted">
-              Page {result.page} of {result.pageCount}
-            </span>
-            {result.page < result.pageCount ? (
-              <Link
-                href={`/shop${buildQuery({ q: search, category, sort: sortParam === "featured" ? undefined : sortParam, page: String(result.page + 1) })}`}
-                className={buttonClasses("outline", "sm")}
-              >
-                Next
-              </Link>
-            ) : null}
-          </nav>
-        ) : null}
 
         <section aria-labelledby="shop-faq" className="mt-12 rounded-2xl border border-navy-100 bg-white p-6">
           <h2 id="shop-faq" className="text-lg font-semibold text-navy-900">
